@@ -1,0 +1,43 @@
+//Todo ->
+1. Subject
+    code
+    name
+    price
+
+2. Branch
+    name
+    address
+    tp
+    email
+
+3. Course
+    name
+    price
+    start date
+    end date
+
+4. Semester
+    name
+    price
+    start date
+    end date
+
+5. classRoom
+    name
+    branch
+    price
+
+6. Class session
+    name
+    start date time
+    end date time
+    students
+    employee
+
+7. Employee
+
+8. Student
+
+9. Exam
+
+9. Payment

@@ -33,6 +33,9 @@ $(document).ready(function () {
         return new Date().toJSON().split('T')[0];
     });
 
+    /*Show tool tip*/
+    $('[data-toggle="tooltip"]').tooltip()
+
 });
 
 

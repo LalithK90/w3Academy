@@ -8,6 +8,60 @@
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <h1> I am index page</h1>
+<div class="container bg-light mt-5">
+    <ul class="nav  btn" role="tablist">
+        <li class="col-6 text-center registrationCard ">
+            <a class="nav-link col-12" data-toggle="tab" href="#home" role="tab"><h3>Personal Information</h3></a>
+        </li>
+        <li class="col-6 text-center registrationCard">
+            <a class="nav-link col-12" data-toggle="tab" href="#menu1" role="tab"><h3>Educational Information</h3></a>
+        </li>
+    </ul>
+    <form>
+        <div class="tab-content">
+            <div class="container-fluid tab-pane fade in active mb-3" id="home">
+                <div class="container" style="border-radius: 1rem; margin-bottom: 15px !important;">
+                    <div class="container" >
+                        <div class="form-group row">
+                            <label for="example-select-one">Select one</label>
+                            <select class="" id="example-select-one">
+                                <option selected>Select</option>
+                                <option value="1">Option one</option>
+                                <option value="2">Option two</option>
+                                <option value="3">Option three</option>
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-tel-input">Telephone</label>
+                            <input class="" id="example-tel-input" placeholder="0123456789" required type="tel">
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-url-input">URL</label>
+                            <input class="" id="example-url-input" placeholder="https://exampleurl.com" type="url">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container tab-pane fade mb-3" id="menu1">
+                <div class="container">
+                    <div class="form-group row">
+                        <label for="example-email-input">Email</label>
+                        <input class="" id="example-email-input" placeholder="example@email.com" type="email">
+                    </div>
+                    <div class="form-group row">
+                        <label for="year">Email</label>
+                        <input class="" id="year" placeholder="example@email.com" type="week">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="text-center offset-5">
+                    <button class="btn btn-info text-center" type="submit"> Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 <!--footer include-->
 <footer th:replace="~{fragments/footer :: footerFragment}"></footer>

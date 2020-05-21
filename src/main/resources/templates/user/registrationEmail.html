@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--Styles, meta data, and title are included-->
+<head th:replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body class="bg-light">
+<!--Nav bar is included-->
+<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<br>
+<div class="mt-5 mb-5 offset-sm-4 col-sm-4 col-12 order-4">
+    <div class="card mt-5 text-center registrationCard ">
+        <div class="card-body mt-5">
+            <h1 class="card-title" >Welcome To W3 Academy</h1>
+            <img class="card-img-top img-thumbnail" alt="Card image in the bottom" id="cardImg" src="" th:src="@{/img/log.png}">
+            <p class="card-text">Please provide valid email to register</p>
+            <form action="/register" method="post">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="email"></label>
+                            <input type="email" id="email" name="email" placeholder="Please enter valid email" required data-toggle="tooltip" data-placement="right" title="Please Enter valid Email" data-offset="50%" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit">Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--footer is included-->
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script th:replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>
