@@ -56,10 +56,10 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
 
     /*pdf generate related*/
-    //================= Following jar is need to generate pdf file -https://mvnrepository.com/artifact/com.itextpdf/itextpdf =================//
-    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.9'
+// https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.1'
     // ==== this is need to html content convert to pdf
-    compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.9'
+    compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.13.1'
 
 //====== use as three jars to set bootstrap and front awesome
 // https://mvnrepository.com/artifact/org.webjars/bootstrap
