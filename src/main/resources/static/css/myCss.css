@@ -1,6 +1,13 @@
+@media (prefers-color-scheme: dark) {
+    body {
+        color: rgba(0, 0, 0, .85);
+        background-color: rgba(0, 0, 0, .85);
+    }
+}
+
 /*common css for body start*/
-body{
-    background-color: #fff !important;
+body {
+    background: transparent !important;
 }
 /*common css for body end*/
 /*Registration view start*/
@@ -13,18 +20,19 @@ body{
 }
 
 .registrationCard {
-    margin-top: 40px !important;
     padding-top: 1rem;
     border-radius: 10rem;
     box-shadow: #acacb8 0.3rem 0.3rem;
 }
 
 .card-title {
+    font-family: 'Tangerine', serif;
+    font-size: 48px;
+    text-shadow: 4px 4px 4px #aaa;
     text-align: center;
-    color: white;
+    /*   color: white;*/
     font-weight: bolder;
-    font-family: "Trebuchet MS", Arial, Verdana, serif;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    /* text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;*/
     margin-bottom: 1rem;
 }
 
@@ -54,12 +62,14 @@ body{
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     border-radius: 1rem;
     font-size: 1rem;
     font-style: italic;
     background-color: transparent !important;
 }
+
 @keyframes sizeIncrease {
     50% {
         cursor: pointer;
@@ -130,7 +140,8 @@ button:hover {
 /*button common style end*/
 
 /*Error show box style start */
-#errors{
+#errors {
     border-radius: 2rem !important;
 }
+
 /*Error show box style end */

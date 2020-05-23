@@ -2,6 +2,8 @@ package lk.w3Academy.asset.userManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.w3Academy.asset.employee.entity.Employee;
+import lk.w3Academy.asset.student.entity.Student;
+import lk.w3Academy.asset.userManagement.entity.Enum.UType;
 import lk.w3Academy.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +13,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -24,10 +25,15 @@ import java.util.List;
 public class User extends AuditEntity {
 
     @OneToOne
-    @NotNull
     private Employee employee;
 
-    @Column(nullable = false,unique = true)
+    @OneToOne
+    private Student student;
+
+    @Enumerated(EnumType.STRING)
+    private UType uType;
+
+    @Column(nullable = false, unique = true)
     @Size(min = 5, message = "user name should include at least five characters")
     private String username;
 
@@ -38,11 +44,11 @@ public class User extends AuditEntity {
     @Column(nullable = false)
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserSessionLog> userSessionLogs;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @Fetch( FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

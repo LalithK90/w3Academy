@@ -33,6 +33,10 @@ public class ConformationToken {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime endDate;
 
+    @Transient
+    private String password, newPassword;
+
+
     public ConformationToken(String email) {
         this.email = email;
         this.conformationTokenType = ConformationTokenType.NEWUSER;

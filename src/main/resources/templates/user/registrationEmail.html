@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <!--Styles, meta data, and title are included-->
-<head th:replace="~{fragments/header :: headerFragment}">
+<head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body class="bg-light">
 <!--Nav bar is included-->
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <br>
-<div class="mt-5 mb-5 offset-sm-4 col-sm-4 col-12 order-4">
+<br>
+<div class="mt-5 mb-5 offset-sm-4 col-sm-4 col-12 order-4 mb-5">
     <div class="card mt-5 text-center registrationCard ">
         <div class="card-body mt-5">
             <h1 class="card-title" >Welcome To W3 Academy</h1>
-            <img class="card-img-top img-thumbnail" alt="Card image in the bottom" id="cardImg" src="" th:src="@{/img/log.png}">
-            <p class="card-text">Please provide valid email to register</p>
-            <form action="/register" method="post">
+            <img class="card-img-top img-thumbnail" alt="Card image in the bottom" id="cardImg" src="" data-th-src="@{/img/log.png}">
+            <p class="card-text">[[${message}]]</p>
+            <form data-th-action="${addState?'/register':'/register/forgotten'}" method="post">
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
@@ -35,8 +36,8 @@
     </div>
 </div>
 <!--footer is included-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
 <!--script is included-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 </body>
 </html>

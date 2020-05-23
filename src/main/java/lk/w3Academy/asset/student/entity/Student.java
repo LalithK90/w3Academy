@@ -8,6 +8,7 @@ import lk.w3Academy.asset.employee.entity.Enum.Designation;
 import lk.w3Academy.asset.message.entity.EmailMessage;
 import lk.w3Academy.asset.student.entity.Enum.StudentStatus;
 import lk.w3Academy.asset.subject.entity.Subject;
+import lk.w3Academy.asset.userManagement.entity.User;
 import lk.w3Academy.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -61,21 +62,20 @@ public class Student extends AuditEntity {
     @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NULL", length = 255)
     private String address;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth;
+
     @Enumerated(EnumType.STRING)
     private Title title;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-
-    @Enumerated(EnumType.STRING)
-    private Designation designation;
-
     @Enumerated(EnumType.STRING)
     private StudentStatus studentStatus;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+    @OneToOne
+    private User user;
 
     @ManyToMany(mappedBy = "students")
     private List<EmailMessage> emailMessages;

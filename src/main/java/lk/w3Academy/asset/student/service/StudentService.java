@@ -2,6 +2,9 @@ package lk.w3Academy.asset.student.service;
 
 import lk.w3Academy.asset.student.dao.StudentDao;
 import lk.w3Academy.asset.student.entity.Student;
+import lk.w3Academy.asset.userManagement.dao.UserDao;
+import lk.w3Academy.asset.userManagement.entity.Enum.UType;
+import lk.w3Academy.asset.userManagement.entity.User;
 import lk.w3Academy.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
@@ -14,18 +17,20 @@ import java.util.List;
 
 @Service
 // spring transactional annotation need to tell spring to this method work through the project
-@CacheConfig( cacheNames = "student" )
-public class StudentService implements AbstractService<Student, Long > {
+@CacheConfig(cacheNames = "student")
+public class StudentService implements AbstractService<Student, Long> {
 
     private final StudentDao studentDao;
+    private final UserDao userDao;
 
     @Autowired
-    public StudentService(StudentDao studentDao) {
+    public StudentService(StudentDao studentDao, UserDao userDao) {
         this.studentDao = studentDao;
+        this.userDao = userDao;
     }
 
     @Cacheable
-    public List< Student > findAll() {
+    public List<Student> findAll() {
         return studentDao.findAll();
     }
 
@@ -34,26 +39,34 @@ public class StudentService implements AbstractService<Student, Long > {
         return studentDao.getOne(id);
     }
 
-    @Caching( evict = {@CacheEvict( value = "student", allEntries = true )},
-            put = {@CachePut( value = "student", key = "#student.id" )} )
+    @Caching(evict = {@CacheEvict(value = "student", allEntries = true)},
+            put = {@CachePut(value = "student", key = "#student.id")})
     @Transactional
     public Student persist(Student student) {
+        if (student.getId() == null) {
+            Student student1 = studentDao.save(student);
+            User user = userDao.findByUsername(student.getEmail());
+            user.setStudent(student1);
+            user.setUType(UType.STUDENT);
+            userDao.save(user);
+            return student1;
+        }
         return studentDao.save(student);
     }
 
-    @CacheEvict( allEntries = true )
+    @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         studentDao.deleteById(id);
         return false;
     }
 
     @Cacheable
-    public List< Student > search(Student student) {
+    public List<Student> search(Student student) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< Student > studentExample = Example.of(student, matcher);
+        Example<Student> studentExample = Example.of(student, matcher);
         return studentDao.findAll(studentExample);
     }
 

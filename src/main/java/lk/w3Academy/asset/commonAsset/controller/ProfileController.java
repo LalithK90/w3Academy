@@ -1,5 +1,6 @@
 package lk.w3Academy.asset.commonAsset.controller;
 
+import lk.w3Academy.asset.userManagement.entity.Enum.UType;
 import lk.w3Academy.asset.userManagement.entity.PasswordChange;
 import lk.w3Academy.asset.userManagement.entity.User;
 import lk.w3Academy.asset.userManagement.service.UserService;
@@ -29,26 +30,31 @@ public class ProfileController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping( value = "/profile" )
+    @GetMapping(value = "/profile")
     public String userProfile(Model model, Principal principal) {
         model.addAttribute("addStatus", true);
-        model.addAttribute("employeeDetail", userService.findByUserName(principal.getName()).getEmployee());
+        User user = userService.findByUserName(principal.getName());
+        if (user.getUType().equals(UType.STAFF)) {
+            model.addAttribute("employeeDetail", user.getEmployee());
+        } else {
+            model.addAttribute("employeeDetail", user.getStudent());
+        }
         return "employee/employee-detail";
     }
 
-    @GetMapping( value = "/passwordChange" )
+    @GetMapping(value = "/passwordChange")
     public String passwordChangeForm(Model model) {
         model.addAttribute("pswChange", new PasswordChange());
         return "login/passwordChange";
     }
 
-    @PostMapping( value = "/passwordChange" )
+    @PostMapping(value = "/passwordChange")
     public String passwordChange(@Valid @ModelAttribute PasswordChange passwordChange,
                                  BindingResult result, RedirectAttributes redirectAttributes) {
         User user =
                 userService.findById(userService.findByUserIdByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
 
-        if ( passwordEncoder.matches(passwordChange.getOldPassword(), user.getPassword()) && !result.hasErrors() && passwordChange.getNewPassword().equals(passwordChange.getNewPasswordConform()) ) {
+        if (passwordEncoder.matches(passwordChange.getOldPassword(), user.getPassword()) && !result.hasErrors() && passwordChange.getNewPassword().equals(passwordChange.getNewPasswordConform())) {
 
             user.setPassword(passwordChange.getNewPassword());
             userService.persist(user);
@@ -65,7 +71,7 @@ public class ProfileController {
     }
 
     @PostMapping("/forgottenPassword")
-    public String passwordResetToken(@RequestParam("email") String email){
+    public String passwordResetToken(@RequestParam("email") String email) {
         return "";
     }
 }

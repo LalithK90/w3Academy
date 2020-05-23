@@ -26,4 +26,8 @@ public class ConformationTokenService {
     public ConformationToken findByEmail(String email) {
         return conformationTokenDao.findByEmail(email);
     }
+
+    public void deleteByConformationToken(ConformationToken conformationToken) {
+    conformationTokenDao.delete(conformationToken);
+    }
 }
