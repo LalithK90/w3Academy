@@ -93,7 +93,6 @@ input, select, textarea {
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.5;
-  /*  color: #495057;*/
     background-color: transparent;
     background-clip: padding-box;
     border: none;
@@ -117,7 +116,9 @@ input:required:invalid, input:focus:invalid {
 input:required:valid, input:focus:valid {
     border-left: 10px solid greenyellow;
 }
-
+.custom-switch{
+     padding-left: 3rem !important;
+}
 @keyframes inputAttention {
     5% {
         background: linear-gradient(to right, white, rgba(0, 59, 255, 0.11));

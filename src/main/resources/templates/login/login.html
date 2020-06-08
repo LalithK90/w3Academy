@@ -8,19 +8,23 @@
 <!--/* Nav bar is included */-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <br>
-<div class="mt-5 offset-sm-4 col-sm-4 col-12 order-4 mb-5">
+<div class="mt-5 offset-sm-4 col-sm-4 col-12 order-4">
     <div class="pt-5 mt-5 registrationCard ">
         <div class="card-body mt-5 text-center">
-            <h1 class="card-title">Welcome To W3 Academy</h1>
-            <img alt="Card image in the bottom" class="card-img-top img-thumbnail text-center" data-th-src="@{/img/log.png}"
-                 id="cardImg"
-                 src="">
-            <form data-th-action="${'/login'}" method="post">
+            <h1 class="card-title">Welcome
+                <br>
+                <span class="font-italic font-weight-bold">W</span>
+                <sup class="textLayer-shadow font-italic">3</sup>
+                <span class="font-italic font-weight-bold">Campus</span>
+            </h1>
+            <img alt="Card image in the bottom" class="card-img-top img-thumbnail text-center"
+                 data-th-src="@{/img/log.png}" id="cardImg" src="">
+            <form autocomplete="off" data-th-action="${'/login'}" method="post">
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group text-left">
-                            <label class="darkmode--activated" for="username" >Username</label>
-                            <input class="" data-th-name="${'username'}" id="username" placeholder="username"
+                            <label class="darkmode--activated" data-th-for="${username}">Username</label>
+                            <input class="" data-th-name="${'username'}" placeholder="username"
                                    required type="text">
                         </div>
                     </div>
@@ -28,11 +32,16 @@
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group text-left">
-                            <label class="darkmode--activated" for="inputPassword" >Password </label>
-                            <input class="" data-th-name="${'password'}" id="inputPassword" placeholder="password"
+                            <label class="darkmode--activated" data-th-for="${inputPassword}">Password </label>
+                            <input class="" data-th-name="${'password'}" placeholder="password"
                                    required type="password">
-
                         </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="custom-control custom-switch">
+                        <input class="custom-control-input" id="switchCustom" type="checkbox" value="customSwitch">
+                        <label class="custom-control-label" for="switchCustom">Remember me</label>
                     </div>
                 </div>
                 <div class="form-row">
@@ -47,12 +56,13 @@
                         password. </p>
                 </div>
                 <div class="container-fluid ">
-                    <p class="bg-white text-capitalize text-danger text-lg-center" data-th-text="${err}"
-                       id="errorMessage"></p>
+                    <p class="bg-white text-capitalize text-danger text-lg-center" data-th-text="${err}"></p>
                 </div>
             </form>
             <div class="container-fluid">
-                <a data-th-href="${'/register/forgotten'}"><p class="text-center"> Forgot password ?</p></a>
+                <a data-th-href="${'/register/forgotten'}">
+                    <span class="text-center"> Forgot password ?</span>
+                </a>
             </div>
         </div>
     </div>
@@ -61,6 +71,5 @@
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
 <!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
-
 </body>
 </html>

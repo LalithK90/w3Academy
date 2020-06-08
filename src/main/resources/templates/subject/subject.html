@@ -24,7 +24,7 @@
                     <!--/* Name */-->
                     <div class="form-group form-row col-12">
                         <label class="darkmode--activated col-sm-4" data-th-for="${name}">Name :</label>
-                        <input class="col-sm-8 darkmode--activated" data-th-field="*{name}"  required
+                        <input class="col-sm-8 darkmode--activated" data-th-field="*{name}" required
                                tabindex="1" type="text"/>
                         <span class="error" data-th-errors="*{name}"
                               data-th-if="${#fields.hasErrors('name')}"></span>
@@ -120,19 +120,21 @@
                     <p class="darkmode--activated col-sm-8"> [[${subjectDetail.code}]]</p>
                 </div>
                 <!--/* Included Semester  */-->
-                <div class="form-group form-row col-12">
+                <div class="form-group form-row col-12" data-th-if="${not #lists.isEmpty(subjectDetail.semesters)}">
                     <label class="darkmode--activated col-sm-4">Included Semester :</label>
                     <p class="darkmode--activated col-sm-8"></p>
                 </div>
                 <!--/* Responsible Employee  */-->
-                <div class="form-group form-row col-12">
+                <div class="form-group form-row col-12"
+                     data-th-if="${not #lists.isEmpty(subjectDetail.subjectEmployees)}">
                     <label class="darkmode--activated col-sm-4">Responsible Employee :</label>
                     <p class="darkmode--activated col-sm-8"></p>
                 </div>
                 <!--/* Enroll Student Count  */-->
-                <div class="form-group form-row col-12">
+                <div class="form-group form-row col-12"
+                     data-th-if="${not #lists.isEmpty(subjectDetail.subjectStudents)}">
                     <label class="darkmode--activated col-sm-4">Enroll Student Count :</label>
-                    <p class="darkmode--activated col-sm-8"></p>
+                    <p class="darkmode--activated col-sm-8">[[${#arrays.length(subjectDetail.subjectStudents)}]]</p>
                 </div>
             </div>
             <div class="modal-footer bg-secondary">
@@ -147,12 +149,10 @@
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 <!--/*  data table  */-->
 <script data-th-src="@{/js/pagination.js}"></script>
-
 <script type="text/javascript">
     $(document).ready(function () {
         $("#modalScrollableBody").modal('show');
     });
 </script>
-
 </body>
 </html>
