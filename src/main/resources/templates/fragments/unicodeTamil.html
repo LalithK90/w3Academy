@@ -8,29 +8,29 @@
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <div class="container-fluid" onload="javascript:txtBox.box1.focus();" data-th-fragment="unicodeTamilFragment">
-    <!-- modal tamil button -->
-    <!--
+    <!--/*  modal tamil button  */-->
+    <!--/*
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bd-example-modal-xl"><i
                 class="fas fa-language"></i> &nbsp;Tamilish to Tamil
         </button>
-    -->
+     */-->
 
-    <!--Translator content-->
+    <!--/* Translator content */-->
     <div class="modal fade  " id="bd-example-modal-xl" tabindex="-1" role="dialog"
          aria-labelledby="myExtraLargeModalLabel"
          aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
-                <!--Model header-->
+                <!--/* Model header */-->
                 <div class="modal-header">
                     <h5 class="modal-title">Real Time Tamilish Translate to Tamil</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <!--Model body-->
+                <!--/* Model body */-->
                 <div class="modal-body">
-                    <!--Translator content-->
+                    <!--/* Translator content */-->
                     <div class="container-fluid form-row">
                         <div class="bg-dark formBorder form-group">
                             <form name="txtBoxTamilish" class="form ">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <!--model footer-->
+                <!--/* model footer */-->
                 <div class="modal-footer">
                     <button onClick="copyit('tamilCode')" type="button"
                             class="btn btn-md btn-success" data-dismiss="modal"><i class="fas fa-copy"></i>&nbsp;
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <!--Style-->
+    <!--/* Style */-->
     <style type="text/css">
         .model {
             SCROLLBAR-FACE-COLOR: #ffffff;
@@ -196,7 +196,7 @@
             font-family: Latha;
             src: url(eot/LATHA0.eot);
     </style>
-    <!--Script-->
+    <!--/* Script */-->
     <script language="javascript" type="text/javascript">
         var text;
 
@@ -862,9 +862,9 @@
 
 </div>
 
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 </body>
 </html>

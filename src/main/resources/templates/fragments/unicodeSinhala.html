@@ -7,29 +7,29 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <div class="container-fluid" onload="javascript:txtBox.box.focus();" data-th-fragment="unicodeSinhalaFragment">
-<!--
+<!--/*
     &lt;!&ndash;Sinhala modal button &ndash;&gt;
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl"><i
             class="fas fa-language"></i> &nbsp;Singlish to Sinhala
     </button>
 
--->
+ */-->
 
-    <!--Translator content-->
+    <!--/* Translator content */-->
     <div class="modal fade bd-example-modal-xl " tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <!--Model header-->
+                <!--/* Model header */-->
                 <div class="modal-header">
                     <h5 class="modal-title">Real Time Singlish Translate to Sinhala</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <!--Model body-->
+                <!--/* Model body */-->
                 <div class="modal-body">
-                    <!--Translator content-->
+                    <!--/* Translator content */-->
                     <div class="container-fluid form-row">
                         <div class="col-6 bg-dark formBorder form-group">
                             <form name="txtBox" id="txtBox" class="form">
@@ -68,7 +68,7 @@
                                 </div>
                             </form>
                         </div>
-                        <!--Sinhala unicode table - schema -->
+                        <!--/* Sinhala unicode table - schema */ */-->
                         <div id="scheme" class="bg-dark formBorder form-group col-6">
                             <table>
                                 <tr>
@@ -1257,7 +1257,7 @@
                         </div>
                     </div>
                 </div>
-                <!--model footer-->
+                <!--/* model footer */-->
                 <div class="modal-footer">
                     <button onclick="copyIt('uni')" type="button"
                             class="btn btn-md btn-success" data-dismiss="modal"><i class="fas fa-copy"></i>&nbsp;
@@ -1267,7 +1267,7 @@
             </div>
         </div>
     </div>
-    <!--Style-->
+    <!--/* Style */-->
     <style type="text/css">
         .model {
             SCROLLBAR-FACE-COLOR: #ffffff;
@@ -1409,13 +1409,13 @@
         .link {
             font-weight: bold;
             color: green;
-            border-widdata-th- 1px;
+            border-width: 1px;
             border-style: solid;
             border-color: green;
             cursor: hand;
         }
     </style>
-    <!--Script-->
+    <!--/* Script */-->
     <script language="JavaScript" type="text/javascript">
 
 
@@ -1695,14 +1695,14 @@
         };
 
 
-        //  End -->
+        //  End  */-->
 
     </script>
 </div>
 
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
 </body>

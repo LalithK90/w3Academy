@@ -103,7 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         .usernameParameter("username")
                                         .passwordParameter("password")
                                         .successHandler(customAuthenticationSuccessHandler())
-                                        .failureForwardUrl("/login")
+                                        .failureUrl("/login?error='Entered password or username is not valid'")
                           )
                 //Logout controlling
                 .logout(
@@ -122,7 +122,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                                         .invalidSessionUrl("/login")
                                         .maximumSessions(1)
-                                        .expiredUrl("/l")
                                         .sessionRegistry(sessionRegistry()))
                 //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)

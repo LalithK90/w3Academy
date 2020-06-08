@@ -50,10 +50,10 @@ public class DateTimeAgeService {
     }
 
     /* atTime(int hour, int minutes, int seconds, int nanoseconds)
-     * hour - the hour-of-day, value range from 0 to 23.
-     * minute - the minute-of-hour, value range from 0 to 59.
-     * second - the second-of-minute, value range from 0 to 59.
-     * nanoOfSecond - the nano-of-second, value range from 0 to 999,999,999
+      hour - the hour-of-day, value range from 0 to 23.
+      minute - the minute-of-hour, value range from 0 to 59.
+      second - the second-of-minute, value range from 0 to 59.
+      nanoOfSecond - the nano-of-second, value range from 0 to 999,999,999
      */
     public LocalDateTime dateTimeToLocalDateEndInDay(LocalDate localDate) {
         return localDate.atTime(21, 59, 59, 999999999);
@@ -72,7 +72,7 @@ public class DateTimeAgeService {
         LocalDateTime fromFormat = dateTimeToLocalDateStartInDay(from);
         LocalDateTime toFormat = dateTimeToLocalDateEndInDay(to);
 
-        if ( fromFormat.isAfter(givenDate) || toFormat.isBefore(givenDate) || fromFormat.isEqual(givenDate) || toFormat.isEqual(givenDate) ) {
+        if (fromFormat.isAfter(givenDate) || toFormat.isBefore(givenDate) || fromFormat.isEqual(givenDate) || toFormat.isEqual(givenDate)) {
             valide = true;
         }
 
