@@ -4,6 +4,7 @@ import lk.w3Campus.asset.course.service.*;
 import lk.w3Campus.asset.employee.service.EmployeeService;
 import lk.w3Campus.asset.subject.service.SubjectService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,5 +28,9 @@ public class CourseController {
         this.employeeCourseService = employeeCourseService;
     }
 
+    @GetMapping
+    private void findAll() {
+
+    }
 
 }
