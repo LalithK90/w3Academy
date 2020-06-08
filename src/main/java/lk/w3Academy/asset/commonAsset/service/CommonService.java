@@ -4,7 +4,7 @@ import lk.w3Academy.asset.commonAsset.model.Enum.BloodGroup;
 import lk.w3Academy.asset.commonAsset.model.Enum.CivilStatus;
 import lk.w3Academy.asset.commonAsset.model.Enum.Gender;
 import lk.w3Academy.asset.commonAsset.model.Enum.Title;
-import lk.w3Academy.asset.employee.controller.EmployeeRestController;
+import lk.w3Academy.asset.employee.controller.EmployeeController;
 import lk.w3Academy.asset.employee.entity.Enum.Designation;
 import lk.w3Academy.asset.employee.entity.Enum.EmployeeStatus;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class CommonService {
                 .toString());*/
         Object[] arg = {"designation", "id"};
         model.addAttribute("employeeUrl", MvcUriComponentsBuilder
-                .fromMethodName(EmployeeRestController.class, "getEmployeeByWorkingPlace", arg)
+                .fromMethodName(EmployeeController.class, "getEmployeeByWorkingPlace", arg)
                 .build()
                 .toString());
     }
@@ -42,14 +42,39 @@ public class CommonService {
         model.addAttribute("bloodGroup", BloodGroup.values());
     }
 
-    //common things to employee and offender - end
+
     //common mobile number length employee,offender,guardian, petitioner - start
-    // private final mobile length validator
     public String commonMobileNumberLengthValidator(String number) {
-        if ( number.length() == 9 ) {
+        if (number.length() == 9) {
             number = "0".concat(number);
         }
         return number;
+    }
+
+    //number (particular scenario) build
+    public String numberIncrement(int newNumber, String code) {
+        String makeNumber = "";
+        if (newNumber != 0) {
+            if ((newNumber < 10) && (newNumber > 0)) {
+                makeNumber = code + "0000" + newNumber;
+            }
+            if ((newNumber < 100) && (newNumber > 10)) {
+                makeNumber = code + "000" + newNumber;
+            }
+            if ((newNumber < 1000) && (newNumber > 100)) {
+                makeNumber = code + "00" + newNumber;
+            }
+            if ((newNumber < 10000) && (newNumber > 1000)) {
+                makeNumber = code + "0" + newNumber;
+            }
+            if ((newNumber > 10000)) {
+                makeNumber = code + newNumber;
+            }
+
+            return makeNumber;
+        } else {
+            return code+"00001";
+        }
     }
 
 }

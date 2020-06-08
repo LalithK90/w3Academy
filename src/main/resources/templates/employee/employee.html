@@ -6,9 +6,9 @@
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<br>
+<div class="mt-5 col-12 order-4">
+    <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
             <a class="btn btn-success" href="/employee/add"><i class="fa fa-user-plus"></i>
                 &nbsp; New Employee</a>
@@ -46,17 +46,17 @@
                 </thead>
                 <tbody>
                 <tr data-th-each="employee, rowCount : ${employees}">
-                    <th data-th-text="${rowCount.count}"></th>
-                    <th data-th-text="${employee.payRoleNumber}"></th>
+                    <th>[[${rowCount.count}]]</th>
+                    <th>[[${employee.payRoleNumber}]]</th>
                     <th data-th-text="${employee.callingName}"></th>
                     <th data-th-text="${employee.mobileOne}"></th>
                     <th data-th-text="${employee.designation.designation}"></th>
                     <th data-th-text="${employee.employeeStatus.employeeStatus}"></th>
                     <th>
-                        <a id="employeeView" data-th-href="${'/employee/' + employee.id}" class="btn btn-success btn-sm"><i
+                        <a data-th-href="${'/employee/' + employee.id}" class="btn btn-success btn-sm"><i
                                 class="fa fa-folder-open"></i>&nbsp;View</a>
-                        <a id="employeeEdit" data-th-href="${'/employee/edit/' + employee.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                        <a id="employeeRemove" data-th-href="${'/employee/remove/' + employee.id}"
+                        <a data-th-href="${'/employee/edit/' + employee.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <a data-th-href="${'/employee/remove/' + employee.id}"
                            data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                             Delete</a>
                     </th>
@@ -78,17 +78,20 @@
                 </h3>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
+
     </div>
 </div>
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<!--/*  data table  */-->
+<script data-th-src="@{/js/pagination.js}"></script>
+<script>
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
 
+</script>
 </body>
 </html>

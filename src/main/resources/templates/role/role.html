@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<br>
+<div class="mt-5 col-12 order-4">
+    <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
             <a class="btn btn-success" href="/role/add">
                 <i class="fa fa-user-plus" style="font-size: 18px;"></i> &nbsp; New Role </a>
@@ -26,7 +26,7 @@
     </div>
 </div>
 <div class="container-fluid bg-dark formBorder">
-    <div class="offset-2 col-8 col-sm-8 col-md-8" id="roleListPresent" data-th-if="${not #lists.isEmpty(roles)}">
+    <div class="offset-2 col-8 col-sm-8 col-md-8" data-th-if="${not #lists.isEmpty(roles)}" id="roleListPresent">
         <div class="table-responsive">
             <table class="table table-striped table-condensed">
                 <thead>
@@ -41,23 +41,26 @@
                     <th data-th-text="${rowCount.count}"></th>
                     <th data-th-text="${role.roleName}"></th>
                     <th data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                        <a id="edit" data-th-href="${'/role/edit/' + role.id}" class="btn btn-primary btn-sm mr-2 p-2">Edit
+                        <a class="btn btn-primary btn-sm mr-2 p-2" data-th-href="${'/role/edit/' + role.id}" id="edit">Edit
                         </a>
                         &nbsp;
-                        <a id="remove" data-th-href="${'/role/remove/' + role.id}" class="btn btn-danger btn-sm mr-2 p-2"
+                        <a class="btn btn-danger btn-sm mr-2 p-2" data-th-href="${'/role/remove/' + role.id}"
+                           id="remove"
                            onclick="if
                         (!(confirm('Are you sure you want to delete this role?'))) return false"
->Delete</a></th>
+                        >Delete</a></th>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<!--/*  data table  */-->
+<script data-th-src="@{/js/pagination.js}"></script>
 
 </body>
 </html>

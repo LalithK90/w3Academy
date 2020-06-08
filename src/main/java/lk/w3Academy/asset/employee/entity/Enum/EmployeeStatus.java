@@ -1,23 +1,20 @@
 package lk.w3Academy.asset.employee.entity.Enum;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum EmployeeStatus {
     WORKING("Working"),
     LEAVE("Leave"),
+    MATERNITYLEAVE("Maternity Leave"),
     SUSPENDED("Suspended"),
     NOPAY("No pay"),
     MEDICAL("Medical Leave"),
     BLOCK("Block"),
     RESIGNED("Resigned"),
     RETIRED("Retired");
-
     private final String employeeStatus;
 
-    EmployeeStatus(String employeeStatus) {
-
-        this.employeeStatus = employeeStatus;
-    }
-
-    public String getEmployeeStatus() {
-        return employeeStatus;
-    }
 }

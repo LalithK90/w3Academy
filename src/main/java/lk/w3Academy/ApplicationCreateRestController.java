@@ -1,6 +1,5 @@
 package lk.w3Academy;
 
-import lk.w3Academy.asset.commonAsset.model.Enum.BloodGroup;
 import lk.w3Academy.asset.commonAsset.model.Enum.CivilStatus;
 import lk.w3Academy.asset.commonAsset.model.Enum.Gender;
 import lk.w3Academy.asset.commonAsset.model.Enum.Title;
@@ -34,11 +33,11 @@ public class ApplicationCreateRestController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping( "/select/user" )
+    @GetMapping("/select/user")
     public String saveUser() {
-        //roles list start
-        String[] roles = {"ADMIN","STUDENT"};
-        for ( String s : roles ) {
+//roles list start
+        String[] roles = {"ADMIN", "STUDENT"};
+        for (String s : roles) {
             Role role = new Role();
             role.setRoleName(s);
             roleService.persist(role);
@@ -46,15 +45,14 @@ public class ApplicationCreateRestController {
 
 //Employee
         Employee employee = new Employee();
-        employee.setPayRoleNumber("11111111");
+        employee.setNumber("W3E000000");
         employee.setName("Admin User");
         employee.setCallingName("Admin");
         employee.setName("908670000V");
         employee.setMobileOne("0750000000");
         employee.setTitle(Title.DR);
         employee.setGender(Gender.MALE);
-        employee.setBloodGroup(BloodGroup.AP);
-        employee.setDesignation(Designation.ED);
+        employee.setDesignation(Designation.NTM);
         employee.setCivilStatus(CivilStatus.UNMARRIED);
         employee.setEmployeeStatus(EmployeeStatus.WORKING);
         employee.setDateOfBirth(LocalDate.now().minusYears(18));
@@ -70,9 +68,9 @@ public class ApplicationCreateRestController {
         String message = "Username:- " + user.getUsername() + "\n Password:- " + user.getPassword();
         user.setEnabled(true);
         user.setRoles(roleService.findAll()
-                              .stream()
-                              .filter(role -> role.getRoleName().equals("ADMIN"))
-                              .collect(Collectors.toList()));
+                .stream()
+                .filter(role -> role.getRoleName().equals("ADMIN"))
+                .collect(Collectors.toList()));
         userService.persist(user);
 
         return message;

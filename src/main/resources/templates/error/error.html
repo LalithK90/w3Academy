@@ -6,6 +6,8 @@
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<br>
+<br>
 <main>
 <div class="col-12 col-sm-12 col-md-12 mt-4">
     <div class="container-fluid" data-th-with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
@@ -23,7 +25,7 @@
             </marquee>
         </div>
         <div class="container-fluid mt-4 text-center">
-            <p class="invalid-feedback" data-th-text="${errorMessage}">Error java.lang.NullPointerException</p>
+            <p class="darkmode--activated invalid-feedback" data-th-text="${errorMessage}">Error java.lang.NullPointerException</p>
         </div>
         <div class="container-fluid text-center">
             <a href="/home">
@@ -35,9 +37,9 @@
     </div>
 </div>
 </main>
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
 </body>

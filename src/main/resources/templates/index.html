@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<h1> I am index page</h1>
+<div class="mt-5 offset-sm-4 col-sm-4 col-12 order-4">
+    <div class="pt-5 ">
+    </div>
+</div>
 <div class="container bg-light mt-5">
     <ul class="nav  btn" role="tablist">
         <li class="col-6 text-center registrationCard ">
@@ -21,7 +23,7 @@
         <div class="tab-content">
             <div class="container-fluid tab-pane fade in active mb-3" id="home">
                 <div class="container" style="border-radius: 1rem; margin-bottom: 15px !important;">
-                    <div class="container" >
+                    <div class="container">
                         <div class="form-group row">
                             <label for="example-select-one">Select one</label>
                             <select class="" id="example-select-one">
@@ -63,9 +65,9 @@
     </form>
 </div>
 
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
 </body>

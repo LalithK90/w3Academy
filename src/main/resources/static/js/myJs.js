@@ -10,8 +10,6 @@ $(document).ready(function () {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(10);
     });
     /*//Nav bar properties - end//*/
-    /*//Nav bar properties - end//*/
-
 
     /*//--------------- data table short using - data table plugin ------- start //*/
     $("#myTable").DataTable({
@@ -33,11 +31,25 @@ $(document).ready(function () {
         return new Date().toJSON().split('T')[0];
     });
 
-    /*Show tool tip*/
-    $('[data-toggle="tooltip"]').tooltip()
-
 });
+//dark mode script - start
+let options = {
+    bottom: '32px', // default: '32px'
+    right: '32px', // default: '32px'
+    left: 'unset', // default: 'unset'
+    time: '0.5s', // default: '0.3s'
+    mixColor: '#fff', // default: '#fff'
+    backgroundColor: '#fff',  // default: '#fff'
+    buttonColorDark: '#100f2c',  // default: '#100f2c'
+    buttonColorLight: '#fff', // default: '#fff'
+    saveInCookies: true, // default: true,
+    label: '🌓', // default: ''
+    autoMatchOsTheme: true // default: true
+}
 
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+//dark mode script - end
 
 // regex
 let nicRegex = /^([0-9]{9}[vV|xX])|^([0-9]{12})$/;

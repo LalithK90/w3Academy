@@ -1,5 +1,8 @@
 package lk.w3Academy.asset.student.controller;
 
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.w3Academy.asset.commonAsset.service.CommonService;
 import lk.w3Academy.asset.student.entity.Student;
 import lk.w3Academy.asset.student.entity.StudentFiles;
@@ -10,18 +13,19 @@ import lk.w3Academy.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
-@RequestMapping( "/student" )
+@RequestMapping("/student")
 @Controller
 public class StudentController {
     private final StudentService studentService;
@@ -50,8 +54,8 @@ public class StudentController {
     }
 
     //When scr called file will send to
-    @GetMapping( "/file/{filename}" )
-    public ResponseEntity< byte[] > downloadFile(@PathVariable( "filename" ) String filename) {
+    @GetMapping("/file/{filename}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable("filename") String filename) {
         StudentFiles file = studentFilesService.findByNewID(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
@@ -66,8 +70,8 @@ public class StudentController {
     }
 
     //Send on student details
-    @GetMapping( value = "/{id}" )
-    public String studentView(@PathVariable( "id" ) Long id, Model model) {
+    @GetMapping(value = "/{id}")
+    public String studentView(@PathVariable("id") Long id, Model model) {
         Student student = studentService.findById(id);
         model.addAttribute("studentDetail", student);
         model.addAttribute("addStatus", false);
@@ -76,8 +80,8 @@ public class StudentController {
     }
 
     //Send student data edit
-    @GetMapping( value = "/edit/{id}" )
-    public String editStudentForm(@PathVariable( "id" ) Long id, Model model) {
+    @GetMapping(value = "/edit/{id}")
+    public String editStudentForm(@PathVariable("id") Long id, Model model) {
         Student student = studentService.findById(id);
         model.addAttribute("student", student);
         model.addAttribute("newStudent", student.getBitIndexNumber());
@@ -87,7 +91,7 @@ public class StudentController {
     }
 
     //Send an student add form
-    @GetMapping( value = {"/add"} )
+    @GetMapping(value = {"/add"})
     public String studentAddForm(Model model) {
         model.addAttribute("addStatus", true);
         model.addAttribute("student", new Student());
@@ -95,45 +99,44 @@ public class StudentController {
     }
 
     //Student add and update
-    @PostMapping( value = {"/add", "/update"} )
+    @PostMapping(value = {"/add", "/update"})
     public String addStudent(@Valid @ModelAttribute Student student, BindingResult result, Model model
-                             ) {
+    ) {
 
-        if ( result.hasErrors() ) {
+        if (result.hasErrors()) {
             model.addAttribute("addStatus", true);
             model.addAttribute("student", student);
             return commonThings(model);
         }
         try {
             student.setMobileOne(commonService.commonMobileNumberLengthValidator(student.getMobileOne()));
-           student.setLand(commonService.commonMobileNumberLengthValidator(student.getLand()));
+            student.setLand(commonService.commonMobileNumberLengthValidator(student.getLand()));
             //after save student files and save student
             studentService.persist(student);
 
             //save student images file
-            for ( MultipartFile file : student.getFiles() ) {
-                if ( file.getOriginalFilename() != null ) {
-                    StudentFiles studentFiles = studentFilesService.findByName(file.getOriginalFilename());
-                    if ( studentFiles != null ) {
+
+                if (student.getFile().getOriginalFilename() != null) {
+                    StudentFiles studentFiles = studentFilesService.findByName(student.getFile().getOriginalFilename());
+                    if (studentFiles != null) {
                         // update new contents
-                        studentFiles.setPic(file.getBytes());
+                        studentFiles.setPic(student.getFile().getBytes());
                         // Save all to database
                     } else {
-                        studentFiles = new StudentFiles(file.getOriginalFilename(),
-                                                          file.getContentType(),
-                                                          file.getBytes(),
-                                                          student.getNic().concat("-" + LocalDateTime.now()),
-                                                          UUID.randomUUID().toString().concat("student"));
+                        studentFiles = new StudentFiles(student.getFile().getOriginalFilename(),
+                                student.getFile().getContentType(),
+                                student.getFile().getBytes(),
+                                student.getNic().concat("-" + LocalDateTime.now()),
+                                UUID.randomUUID().toString().concat("student"));
                         studentFiles.setStudent(student);
                     }
                     studentFilesService.persist(studentFiles);
                 }
-            }
             return "redirect:/student";
 
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             ObjectError error = new ObjectError("student",
-                                                "There is already in the system. <br>System message -->" + e.toString());
+                    "There is already in the system. <br>System message -->" + e.toString());
             result.addError(error);
             model.addAttribute("addStatus", true);
             model.addAttribute("student", student);
@@ -142,14 +145,14 @@ public class StudentController {
     }
 
     //If need to student {but not applicable for this }
-    @GetMapping( value = "/remove/{id}" )
+    @GetMapping(value = "/remove/{id}")
     public String removeStudent(@PathVariable Long id) {
         studentService.delete(id);
         return "redirect:/student";
     }
 
     //To search student any giving student parameter
-    @GetMapping( value = "/search" )
+    @GetMapping(value = "/search")
     public String search(Model model, Student student) {
         model.addAttribute("studentDetail", studentService.search(student));
         return "student/student-detail";
@@ -160,13 +163,39 @@ public class StudentController {
 //----> StudentWorkingPlace - details management - start <----//
 
     //Send form to add working place before find student
-    @GetMapping( value = "/workingPlace" )
+    @GetMapping(value = "/workingPlace")
     public String addStudentWorkingPlaceForm(Model model) {
         model.addAttribute("student", new Student());
         model.addAttribute("studentDetailShow", false);
         return "studentWorkingPlace/addStudentWorkingPlace";
     }
 
+    @GetMapping(value = "/getStudent")
+    @ResponseBody
+    public MappingJacksonValue getStudent(@RequestParam("designation") String designation,
+                                          @RequestParam("id") Long id) {
+        Student student = new Student();
+
+        //MappingJacksonValue
+        List<Student> students = studentService.search(student);
+        //studentService.findByWorkingPlace(workingPlaceService.findById(id));
+
+        //Create new mapping jackson value and set it to which was need to filter
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(students);
+
+        //simpleBeanPropertyFilter :-  need to give any id to addFilter method and created filter which was mentioned
+        // what parameter's necessary to provide
+        SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter
+                .filterOutAllExcept("id", "name", "payRoleNumber", "designation");
+        //filters :-  set front end required value to before filter
+
+        FilterProvider filters = new SimpleFilterProvider()
+                .addFilter("Student", simpleBeanPropertyFilter);
+        //Student :- need to annotate relevant class with JsonFilter  {@JsonFilter("Student") }
+        mappingJacksonValue.setFilters(filters);
+
+        return mappingJacksonValue;
+    }
     //Send a searched student to add working place
 /*
     @PostMapping( value = "/workingPlace" )

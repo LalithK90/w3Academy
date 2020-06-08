@@ -6,10 +6,9 @@
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<!--Page header -->
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<br>
+<div class="mt-5 col-12 order-4">
+    <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
             <a class="btn btn-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
@@ -32,10 +31,10 @@
 </div>
 <div class="container-fluid bg-dark formBorder">
     <div class="row">
-        <!--Left Side-->
+        <!--/* Left Side */-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column">
             <div class="form-row">
-                <!--id-->
+                <!--/* id */-->
                 <div class="col-md-4">
                     <label class="control-label">ID :</label>
                 </div>
@@ -43,7 +42,7 @@
                     <strong><span id="id" data-th-text="${userDetail.id}"></span></strong>
                 </div>
             </div>
-            <!--User Name-->
+            <!--/* User Name */-->
             <div class="form-row">
                 <div class="col-md-4">
                     <label class="control-label">User Name :</label>
@@ -53,9 +52,9 @@
                 </div>
             </div>
         </div>
-        <!--Right Side-->
+        <!--/* Right Side */-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-            <!--Employee Details-->
+            <!--/* Employee Details */-->
             <div class="form-row">
                 <div class="col-md-4">
                     <label class="control-label">Employee :</label>
@@ -65,7 +64,7 @@
                                   data-th-text="${userDetail.employee.name}+ ${' - '}+${userDetail.employee.nic}"></span></strong>
                 </div>
             </div>
-            <!--Created date-->
+            <!--/* Created date */-->
             <div class="form-row">
                 <div class="col-md-4">
                     <label class="control-label">Created Date :</label>
@@ -99,9 +98,9 @@
     </div>
 </div>
 
-<!--footer include-->
+<!--/* footer include */-->
 <footer id="footer" class="page-footer"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script id="script"></script>
 </body>
 </html>

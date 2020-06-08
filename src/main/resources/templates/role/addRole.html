@@ -6,9 +6,9 @@
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<br>
+<div class="mt-5 col-12 order-4">
+    <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
             <a class="btn btn-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
@@ -36,18 +36,18 @@
                 <div class="col-sm-6 col-md-6 offset-2">
                     <div id="idHide" data-th-if="${addStatus==false}" class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="id">ID :</label>
+                            <label class="control-label" data-th-for="${id}">ID :</label>
                         </div>
                         <div class="col-md-8">
-                            <input class="" data-th-field="*{id}"  id="id" type="text" readonly/>
+                            <input class="" data-th-field="*{id}"  type="text" readonly/>
                         </div>
                     </div>
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="control-label" for="roleName">Name :</label>
+                            <label class="control-label" data-th-for="{$roleName}">Name :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="roleName" data-th-field="*{roleName}" class="" type="text" required/>
+                            <input data-th-field="*{roleName}" type="text" required/>
                             <span id="roleNameError" data-th-errors="*{roleName}" data-th-if="${#fields.hasErrors('roleName')}" class="error">Error Role Name</span>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                         id="submit" data-th-text="${addStatus==true?'Save': 'Update'}">                        </span>
                 </button>
             </div>
-            <!--Error-->
+            <!--/* Error */-->
             <div class="form-row">
                 <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors: </label>
                 <ul>
@@ -69,9 +69,9 @@
         </form>
     </div>
 </div>
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
 </body>

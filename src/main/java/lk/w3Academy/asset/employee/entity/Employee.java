@@ -2,18 +2,17 @@ package lk.w3Academy.asset.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.w3Academy.asset.branch.entity.Branch;
-import lk.w3Academy.asset.commonAsset.model.Enum.BloodGroup;
 import lk.w3Academy.asset.commonAsset.model.Enum.CivilStatus;
 import lk.w3Academy.asset.commonAsset.model.Enum.Gender;
 import lk.w3Academy.asset.commonAsset.model.Enum.Title;
 import lk.w3Academy.asset.commonAsset.model.FileInfo;
 import lk.w3Academy.asset.course.entity.BranchCourse;
-import lk.w3Academy.asset.course.entity.CourseDetail;
 import lk.w3Academy.asset.course.entity.EmployeeCourse;
 import lk.w3Academy.asset.employee.entity.Enum.Designation;
 import lk.w3Academy.asset.employee.entity.Enum.EmployeeStatus;
 import lk.w3Academy.asset.message.entity.EmailMessage;
 import lk.w3Academy.asset.subject.entity.SubjectEmployee;
+import lk.w3Academy.asset.userManagement.entity.User;
 import lk.w3Academy.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,7 +36,7 @@ import java.util.List;
 public class Employee extends AuditEntity {
 
     @Column(unique = true)
-    private String payRoleNumber;
+    private String number;
 
     @Size(min = 5, message = "Your name cannot be accepted")
     private String name;
@@ -48,9 +47,6 @@ public class Employee extends AuditEntity {
     @Size(max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 ")
     @Column(unique = true)
     private String nic;
-
-    @Column(unique = true)
-    private String departmentIdNumber;
 
     @Size(max = 10, message = "Mobile number length should be contained 10 and 9")
     private String mobileOne;
@@ -75,9 +71,6 @@ public class Employee extends AuditEntity {
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    private BloodGroup bloodGroup;
-
-    @Enumerated(EnumType.STRING)
     private Designation designation;
 
     @Enumerated(EnumType.STRING)
@@ -91,6 +84,9 @@ public class Employee extends AuditEntity {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfAssignment;
+
+    @OneToOne(mappedBy = "employee")
+    private User user;
 
     @ManyToMany(mappedBy = "employees")
     private List<EmailMessage> emailMessages;
@@ -108,10 +104,7 @@ public class Employee extends AuditEntity {
     private Branch branch;
 
     @Transient
-    private List<MultipartFile> files = new ArrayList<>();
-
-    @Transient
-    private List<String> removeImages = new ArrayList<>();
+    private MultipartFile file;
 
     @Transient
     private List<FileInfo> fileInfos = new ArrayList<>();

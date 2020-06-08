@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<br>
+<div class="mt-5 col-12 order-4">
+    <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
             <a class="btn btn-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
@@ -22,317 +22,246 @@
             </h4>
         </div>
         <div class="col">
-            <a href="/employee" class="btn btn-primary">
+            <a class="btn btn-primary" href="/employee">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
     </div>
 </div>
-<!--Form Content - start -->
-<div class="container-fluid bg-dark formBorder">
+<!--/* Form Content - start  */-->
+<div class="container-fluid ">
     <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/employee/add':'/employee/update'}"
-              data-th-object="${employee}" method="POST" enctype="multipart/form-data">
+        <form data-th-action="${addStatus==true?'/employee/add':'/employee/update'}" data-th-object="${employee}"
+              enctype="multipart/form-data" id="form" method="POST">
             <div class="row">
-                <!--Left Side-->
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <!--Id-->
-                    <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="id">ID :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="id" data-th-field="*{id}" class="" type="text" readonly/>
-                        </div>
+                <!--/* Left Side */-->
+                <div class="col-md-6 col-sm-6 text-left flex-column">
+                    <!--/* Id   */-->
+                    <div class="form-group form-row col-12" data-th-if="${addStatus==false}">
+                        <label class="darkmode--activated col-sm-4 text-right" data-th-for="${id}"> ID : </label>
+                        <input class="col-sm-8" data-th-field="*{id}" readonly type="text"/>
                     </div>
-                    <!--Tittle -->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="title">Title :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="title" data-th-field="*{title}" class="" tabindex="3" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="titles : ${title}"
-                                        data-th-text="${titles.title}"
-                                        data-th-value="${titles}"
-                                        data-th-selected="${titles==employee.title?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
+                    <!--/* Tittle  */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${title}">Title : </label>
+                        <select class="col-sm-8" data-th-field="*{title}" required tabindex="3">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="titles : ${title}"
+                                    data-th-text="${titles.title}"
+                                    data-th-value="${titles}"></option>
+
+                            <!--/*        data-th-selected="${titles==employee.title?'selected':'unselected'}" */-->
+                        </select>
                     </div>
-                    <!--Name-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="name">Name :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="name" data-th-field="*{name}" class="" tabindex="4" type="text" required/>
-                            <span id="nameError" data-th-errors="*{name}"
-                                  data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
-                        </div>
+                    <!--/* Name */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${name}">Name :</label>
+                        <input class="col-sm-8" data-th-field="*{name}" required tabindex="4" type="text"/>
+                        <span class="error" data-th-errors="*{name}"
+                              data-th-if="${#fields.hasErrors('name')}"></span>
                     </div>
-                    <!--Calling Name-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="callingName">Calling Name :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="callingName" data-th-field="*{callingName}" class="" tabindex="5"
-                                   type="text" minlength="5"/>
-                            <span class="error" data-th-errors="*{callingName}"
-                                  data-th-if="${#fields.hasErrors('callingName')}" id="callingNameError">Error
-                                                                       Calling                                                                                                                        Name</span>
-                        </div>
+                    <!--/* Calling Name */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${callingName}">Calling Name :</label>
+                        <input class="col-sm-8" data-th-field="*{callingName}" minlength="5"
+                               tabindex="5" type="text"/>
+                        <span class="error" data-th-errors="*{callingName}"
+                              data-th-if="${#fields.hasErrors('callingName')}"></span>
                     </div>
-                    <!--Nic-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="nic">NIC No :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="nic" data-th-field="*{nic}" class="" tabindex="6" type="text"
-                                   maxlength="12"
-                                   minlength="10" required/>
-                            <span class="error" id="nicError" data-th-errors="*{nic}"
-                                  data-th-if="${#fields.hasErrors('nic')}">Error
-                                                               NIC Number</span>
-                        </div>
+                    <!--/* Nic */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${nic}">NIC No :</label>
+                        <input class="col-sm-8" data-th-field="*{nic}" maxlength="12" minlength="10"
+                               required tabindex="6" type="text"/>
+                        <span class="error" data-th-errors="*{nic}" data-th-if="${#fields.hasErrors('nic')}"></span>
                     </div>
-                    <!--Gender-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="gender">Gender :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="gender" data-th-field="*{gender}" class="" tabindex="7" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="genders : ${gender}"
-                                        data-th-text="${genders.gender}"
-                                        data-th-value="${genders}"
-                                        data-th-selected="${genders==employee.gender?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
+                    <!--/* Gender */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${gender}">Gender :</label>
+                        <select class="col-md-8" data-th-field="*{gender}" required tabindex="7">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="genders : ${gender}"
+                                    data-th-text="${genders.gender}"
+                                    data-th-value="${genders}"></option>
+                            <!--/*    data-th-selected="${genders==employee.gender?'selected':'unselected'}" */-->
+                        </select>
                     </div>
-                    <!--Date of birth-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="dateOfBirth">Birth date :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="dateOfBirth" data-th-field="*{dateOfBirth}" class="" tabindex="8"
-                                   placeholder="Ex: 1990 - 01 - 20"
-                                   required type="date"/>
-                            <span id="dateOfBirthError" data-th-errors="*{dateOfBirth}"
-                                  data-th-if="${#fields.hasErrors('dateOfBirth')}" class="error">Error Birthday</span>
-                        </div>
+                    <!--/* Date of birth */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${dateOfBirth}">Birth date :</label>
+                        <input class="col-md-8" data-th-field="*{dateOfBirth}" id="dateOfBirth"
+                               placeholder="Ex: 1990 - 01 - 20" required tabindex="8" type="date"/>
+                        <span class="error" data-th-errors="*{dateOfBirth}"
+                              data-th-if="${#fields.hasErrors('dateOfBirth')}"></span>
                     </div>
-                    <!--Blood group-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="bloodGroup">Blood Group :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="bloodGroup" data-th-field="*{bloodGroup}" class="" tabindex="9" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="bloodGroups : ${bloodGroup}"
-                                        data-th-text="${bloodGroups.bloodGroup}"
-                                        data-th-value="${bloodGroups}"
-                                        data-th-selected="${bloodGroups==employee.bloodGroup?'selected':'unselected'}">Please select</option>
-                            </select>
-                        </div>
+                    <!--/* Blood group */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" for="bloodGroup">Blood Group :</label>
+                        <select class="col-md-8" data-th-field="*{bloodGroup}" id="bloodGroup" required tabindex="9">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="bloodGroups : ${bloodGroup}"
+                                    data-th-text="${bloodGroups.bloodGroup}"
+                                    data-th-value="${bloodGroups}">
+                                <!--/*       data-th-selected="${bloodGroups==employee.bloodGroup?'selected':'unselected'}" */-->
+                            </option>
+                        </select>
                     </div>
-                    <!--Designation-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="designation">Designation :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="designation" data-th-field="*{designation}" class="" tabindex="10" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="designations : ${designation}"
-                                        data-th-text="${designations.designation}"
-                                        data-th-value="${designations}"
-                                        data-th-selected="${designations==employee.designation?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
+                    <!--/* Designation */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${designation}">Designation :</label>
+                        <select class="col-md-8" data-th-field="*{designation}" required tabindex="10">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="designations : ${designation}"
+                                    data-th-text="${designations.designation}"
+                                    data-th-value="${designations}"></option>
+                            <!--/*        data-th-selected="${designations==employee.designation?'selected':'unselected'}" */-->
+                        </select>
                     </div>
                 </div>
-                <!--Right Side-->
+                <!--/* Right Side */-->
                 <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                    <!--Civil status-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="civilStatus">Civil State :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select data-th-field="*{civilStatus}" id="civilStatus" class="" tabindex="11" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="civilStatu : ${civilStatus}"
-                                        data-th-text="${civilStatu.CivilStatus}"
-                                        data-th-value="${civilStatu}"
-                                        data-th-selected="${civilStatu==employee.civilStatus?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
+                    <!--/* Civil status */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${civilStatus}">Civil State :</label>
+                        <select class="col-md-8" data-th-field="*{civilStatus}" id="civilStatus" required tabindex="11">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="civilState : ${civilStatus}"
+                                    data-th-text="${civilState.CivilStatus}"
+                                    data-th-value="${civilState}"></option>
+                            <!--/*  data-th-selected="${civilState==employee.civilStatus?'selected':'unselected'}" */-->
+                        </select>
                     </div>
-                    <!--Address-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="address">Address :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea id="address" data-th-field="*{address}" class="" tabindex="12" required></textarea>
-                            <span class="error" data-th-errors="*{address}"
-                                  data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
-                        </div>
+                    <!--/* Address */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${address}">Address :</label>
+                        <textarea class="col-md-8" data-th-field="*{address}" required
+                                  tabindex="12"></textarea>
+                        <span class="error" data-th-errors="*{address}"
+                              data-th-if="${#fields.hasErrors('address')}"></span>
                     </div>
-                    <!--Mobile Number One-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="mobileOne">Mobile One No :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="mobileOne" data-th-field="*{mobileOne}" class=" mobile" tabindex="13" type="text"
-                                   maxlength="10" min="9"
-                                   required/>
-                            <span class="error" data-th-errors="*{mobileOne}"
-                                  data-th-if="${#fields.hasErrors('mobileOne')}" id="mobileOneError">Error Mobile Number</span>
-                        </div>
+                    <!--/* Mobile Number One */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${mobileOne}">Mobile One No :</label>
+                        <input class="col-md-8 mobile" data-th-field="*{mobileOne}" maxlength="10"
+                               min="9"
+                               required tabindex="13"
+                               type="tel"/>
+                        <span class="error" data-th-errors="*{mobileOne}"
+                              data-th-if="${#fields.hasErrors('mobileOne')}"></span>
                     </div>
-                    <!--Mobile Number Two-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="mobileTwo">Mobile Two No :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="mobileTwo" data-th-field="*{mobileTwo}" class=" mobile" tabindex="14" type="text"
-                                   maxlength="10" min="9"/>
-                            <span class="error" data-th-errors="*{mobileTwo}"
-                                  data-th-if="${#fields.hasErrors('mobileTwo')}" id="mobileTwoError">Error Mobile  Number</span>
-                        </div>
+                    <!--/* Mobile Number Two */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${mobileTwo}">Mobile Two No :</label>
+                        <input class="col-md-8 mobile" data-th-field="*{mobileTwo}" maxlength="10"
+                               min="9"
+                               tabindex="14" type="tel"/>
+                        <span class="error" data-th-errors="*{mobileTwo}"
+                              data-th-if="${#fields.hasErrors('mobileTwo')}"></span>
                     </div>
-                    <!--Land Number-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="land">Land No :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="land" data-th-field="*{land}" class=" land" type="text" tabindex="15" maxlength="10"
-                                   min="9"/>
-                            <span class="error" data-th-errors="*{land}"
-                                  data-th-if="${#fields.hasErrors('land')}" id="landError">Error Land Number</span>
-                        </div>
+                    <!--/* Land Number */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${land}">Land No :</label>
+                        <input class="col-md-8 land" data-th-field="*{land}" maxlength="10" min="9"
+                               tabindex="15"
+                               type="tel"/>
+                        <span class="error" data-th-errors="*{land}"
+                              data-th-if="${#fields.hasErrors('land')}"></span>
                     </div>
-                    <!--Email-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="email">Email :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="email" data-th-field="*{email}" class="" tabindex="16" type="email" required/>
-                            <span class="error" data-th-errors="*{email}"
-                                  data-th-if="${#fields.hasErrors('email')}" id="emailError">Error Email</span>
-                        </div>
+                    <!--/* Email */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${email}">Email :</label>
+                        <input class="col-md-8" data-th-field="*{email}" required tabindex="16"
+                               type="email"/>
+                        <span class="error" data-th-errors="*{email}"
+                              data-th-if="${#fields.hasErrors('email')}"></span>
                     </div>
-                    <!--Office email-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="officeEmail">Office Email :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="officeEmail" data-th-field="*{officeEmail}" class="" tabindex="17" type="email" required/>
-                            <span class="error" data-th-errors="*{officeEmail}"
-                                  data-th-if="${#fields.hasErrors('officeEmail')}" id="officeEmailError">Error Office Email</span>
-                        </div>
+                    <!--/* Office email */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${officeEmail}">Office Email :</label>
+                        <input class="col-md-8" data-th-field="*{officeEmail}" required tabindex="17" type="email"/>
+                        <span class="error" data-th-errors="*{officeEmail}"
+                              data-th-if="${#fields.hasErrors('officeEmail')}"></span>
                     </div>
-                    <!--Date of assignment-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="dateOfAssignment">Date Of Assignment :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="dateOfAssignment" data-th-field="*{{dateOfAssignment}}" type="date" class="" tabindex="18"
-                                   placeholder="Ex: 1990 - 01 - 20" required/>
-                            <span class="error" data-th-errors="*{dateOfAssignment}"
-                                  data-th-if="${#fields.hasErrors('dateOfAssignment')}" id="dateOfAssignmentError">Error Date Of Assignment</span>
-                        </div>
+                    <!--/* Date of assignment */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${dateOfAssignment}">Date Of Assignment
+                            :</label>
+                        <input class="col-md-8" data-th-field="*{{dateOfAssignment}}" placeholder="Ex: 1990 - 01 - 20"
+                               required tabindex="18" type="date"/>
+                        <span class="error" data-th-errors="*{dateOfAssignment}"
+                              data-th-if="${#fields.hasErrors('dateOfAssignment')}"></span>
                     </div>
-                    <!--Employee status-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="employeeStatus">Employee Status :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="employeeStatus" data-th-field="*{employeeStatus}" class="" tabindex="19" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="employeeStatuss : ${employeeStatus}"
-                                        data-th-text="${employeeStatuss.employeeStatus}"
-                                        data-th-value="${employeeStatuss}"
-                                        data-th-selected="${employeeStatuss==employee.employeeStatus?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
+                    <!--/* Employee status */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${employeeStatus}">Employee Status
+                            :</label>
+                        <select class="col-md-8" data-th-field="*{employeeStatus}" required
+                                tabindex="19">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="employeeState : ${employeeStatus}"
+                                    data-th-text="${employeeState.employeeStatus}"
+                                    data-th-value="${employeeState}"></option>
+                            <!--/*     data-th-selected="${employeeState==employee.employeeStatus?'selected':'unselected'}" */-->
+                        </select>
                     </div>
-                    <!--Current Working Place-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="workingPlace">Employee Working Place :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="workingPlace" data-th-field="*{workingPlace}" class="" tabindex="20" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="workingPlace : ${workingPlaces}"
-                                        data-th-text="${workingPlace.name}"
-                                        data-th-value="${workingPlace.id}"></option>
-                            </select>
-                        </div>
+                    <!--/* Current Working Place */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${workingPlace}">Employee Working Place
+                            :</label>
+                        <select class="col-md-8" data-th-field="*{workingPlace}" id="workingPlace" required
+                                tabindex="20">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="workingPlace : ${workingPlaces}"
+                                    data-th-text="${workingPlace.name}"
+                                    data-th-value="${workingPlace.id}"></option>
+                        </select>
                     </div>
-                    <!--Created by and created at-->
-                    <div id="updateStatus" data-th-if="${addStatus==false}">
-                        <div class="form-row text-right">
-                            <div class="col-md-4">
-                                <label class="control-label" for="createdBy">Created By :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input id="createdBy" data-th-field="*{createdBy}" class="" type="text" readonly/>
-                            </div>
-                        </div>
-                        <div class="form-row text-right">
-                            <div class="col-md-4">
-                                <label class="control-label" for="createdAt">Created At :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input id="createdAt" data-th-text="${{createdAt}}" class="" type="text" readonly/>
-                            </div>
-                        </div>
+                    <!--/* Created by and created at */-->
+                    <div class="form-group form-row col-12" data-th-if="${addStatus==false}">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${createdBy}">Created By :</label>
+                        <input class="col-md-8" data-th-field="*{createdBy}" readonly type="text"/>
+                    </div>
+                    <div class="form-group form-row col-12" data-th-if="${addStatus==false}">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${createdAt}">Created At :</label>
+                        <input class="col-md-8" data-th-text="${{createdAt}}" readonly type="text"/>
                     </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
                     <div class="input-field">
-                        <label class="active ">Photos :</label>
-                        <label>Please remove numbers where included in image number </label>
+                        <label class="active darkmode--activated">Photos :</label>
+                        <label class="darkmode--activated">Please remove numbers where included in image
+                            number </label>
                         <div class="input-images" style="padding-top: .5rem;"></div>
                     </div>
-                    <div class="col" id="photoDetails" data-th-if="${addStatus==false}">
+                    <div class="col" data-th-if="${addStatus==false}" id="photoDetails">
                         <div>
-                            <label class="control-label ">Photo Details : </label>
+                            <label class="darkmode--activated">Photo Details : </label>
                         </div>
                         <div class="row">
-                            <div class="col" id="filesList" data-th-each="file, rowStat: ${files}">
+                            <div class="col" data-th-each="file, rowStat: ${files}" id="filesList">
                                 <div class="col">
                                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <button id="alertClose" type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
+                                        <button aria-label="Close" class="close" data-dismiss="alert"
+                                                id="alertClose"
+                                                type="button">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         <div class="card text-center">
                                             <div class="card-header" hidden>
-                                                <input id="removeImages" data-th-value="${file.filename}" type="text" name="removeImages"></div>
+                                                <input data-th-value="${file.filename}" id="removeImages"
+                                                       name="removeImages"
+                                                       type="text"></div>
                                             <div class="card-body">
-                                                <img id="img" class="rounded" src="" data-th-src="${file.url}"
-                                                     style="height: 150px; widdata-th- 150px; border-radius: 10px" alt=""/>
+                                                <img alt="" class="rounded" data-th-src="${file.url}" id="img"
+                                                     src=""
+                                                     style="height: 150px; width:150px; border-radius: 10px"/>
                                             </div>
                                             <div class="card-footer bg-secondary text-light text-center">
-                                                <p id="imgName" data-th-text="${file.filename}"></p>
-                                                <p> Uploaded Date : <span id="imgCreateAt" data-th-text="${{file.createAt}}"></span>
+                                                <p class="darkmode--activated" data-th-text="${file.filename}"
+                                                   id="imgName"></p>
+                                                <p class="darkmode--activated"> Uploaded Date : <span
+                                                        data-th-text="${{file.createAt}}"
+                                                        id="imgCreateAt"></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -344,26 +273,28 @@
                             </div>
                         </div>
                     </div>
-                    <!--Button-->
+                    <!--/* Button */-->
                     <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                        <button class="btn btn-success" type="submit" tabindex="21">
-                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span id="submit" data-th-text="${addStatus==true?'Save': 'Update'}"></span>
+                        <button class="btn btn-success" tabindex="21" type="submit">
+                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                                data-th-text="${addStatus==true?'Save': 'Update'}"
+                                id="submit"></span>
                         </button>
                     </div>
                 </div>
                 <div class="form-row">
-                    <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors: </label>
+                    <label data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '"></label>
                     <ul>
-                        <li id="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}" class="error"></li>
+                        <li class="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"></li>
                     </ul>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
 <script>

@@ -4,18 +4,15 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.w3Academy.asset.commonAsset.model.Enum.Gender;
 import lk.w3Academy.asset.commonAsset.model.Enum.Title;
 import lk.w3Academy.asset.commonAsset.model.FileInfo;
-import lk.w3Academy.asset.employee.entity.Enum.Designation;
 import lk.w3Academy.asset.message.entity.EmailMessage;
 import lk.w3Academy.asset.student.entity.Enum.StudentStatus;
-import lk.w3Academy.asset.subject.entity.Subject;
+import lk.w3Academy.asset.subject.entity.SubjectStudent;
 import lk.w3Academy.asset.userManagement.entity.User;
 import lk.w3Academy.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,6 +50,8 @@ public class Student extends AuditEntity {
     @Size(max = 10, message = "Mobile number length should be contained 10 and 9")
     private String mobileOne;
 
+    private String mobileTwo;
+
     private String land;
 
     @Column(unique = true)
@@ -74,24 +73,17 @@ public class Student extends AuditEntity {
     @Enumerated(EnumType.STRING)
     private StudentStatus studentStatus;
 
-    @OneToOne
+    @OneToOne(mappedBy = "student")
     private User user;
 
     @ManyToMany(mappedBy = "students")
     private List<EmailMessage> emailMessages;
 
-    @ManyToMany(mappedBy = "students")
-    private List<Subject> subjects;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @Fetch(FetchMode.SUBSELECT)
-    @JoinTable(name = "student_qualification",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "qualification_id"))
-    private List<Qualification> qualifications;
+    @OneToMany(mappedBy = "student")
+    private List<SubjectStudent> subjectStudents;
 
     @Transient
-    private List<MultipartFile> files = new ArrayList<>();
+    private MultipartFile file;
 
     @Transient
     private List<String> removeImages = new ArrayList<>();

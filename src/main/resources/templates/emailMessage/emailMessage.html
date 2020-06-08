@@ -6,9 +6,9 @@
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<br>
+<div class="mt-5 col-12 order-4">
+    <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
         </div>
         <div class="col">
@@ -19,10 +19,10 @@
             </h4>
         </div>
         <div class="col">
-        <!--    <a class="btn btn-danger btn-outline-warning btn-sm" data-th-href="${'/message'}" id="emailMessagesList">
+        <!--/*     <a class="btn btn-danger btn-outline-warning btn-sm" data-th-href="${'/message'}" id="emailMessagesList">
                 <i aria-hidden="true" class="fa fa-gavel"></i>
                 &nbsp; Message List
-            </a>-->
+            </a> */-->
         </div>
     </div>
 </div>
@@ -78,10 +78,12 @@
 </div>
 
 
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
+<!--/*  data table  */-->
+<script data-th-src="@{/js/pagination.js}"></script>
 </body>
 </html>

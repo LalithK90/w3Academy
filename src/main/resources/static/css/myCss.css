@@ -1,3 +1,7 @@
+/*google font import*/
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap');
+
 @media (prefers-color-scheme: dark) {
     body {
         color: rgba(0, 0, 0, .85);
@@ -8,7 +12,9 @@
 /*common css for body start*/
 body {
     background: transparent !important;
+    --error-color: #fa370d;
 }
+
 /*common css for body end*/
 /*Registration view start*/
 #cardImg {
@@ -28,9 +34,9 @@ body {
 .card-title {
     font-family: 'Tangerine', serif;
     font-size: 48px;
-    text-shadow: 4px 4px 4px #aaa;
+    text-shadow: 4px 4px 4px rgba(236, 119, 13, 0.79);
     text-align: center;
-    /*   color: white;*/
+    color: #00a8f5;
     font-weight: bolder;
     /* text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;*/
     margin-bottom: 1rem;
@@ -54,7 +60,7 @@ body {
 }
 
 .navbar {
-    background-color: #4f9cf2 !important;
+    background-color: #1561ad !important;
 }
 
 .navbar-nav {
@@ -79,7 +85,7 @@ body {
 }
 
 /*input filed common style start*/
-input, select {
+input, select, textarea {
     display: block;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
@@ -87,12 +93,16 @@ input, select {
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
+  /*  color: #495057;*/
     background-color: transparent;
     background-clip: padding-box;
     border: none;
     border-bottom: 1px solid black;
-    border-radius: 0.25rem;
+    border-radius: 1.5rem 1rem 1.5rem 1rem;
+}
+
+textarea {
+    height: 8rem;
 }
 
 input:hover, input:focus {
@@ -102,38 +112,49 @@ input:hover, input:focus {
 
 input:required:invalid, input:focus:invalid {
     border-left: 10px solid rgba(245, 31, 31, 0.76);
-    border-radius: 1.5rem 1rem 1.5rem 1rem;
 }
 
 input:required:valid, input:focus:valid {
     border-left: 10px solid greenyellow;
-    border-radius: 1rem 0.5rem 1rem 0.5rem;
 }
 
 @keyframes inputAttention {
+    5% {
+        background: linear-gradient(to right, white, rgba(0, 59, 255, 0.11));
+    }
+    25% {
+        background: linear-gradient(to right, white, rgba(0, 59, 255, 0.22));
+    }
     50% {
         background: linear-gradient(to right, white, rgba(0, 59, 255, 0.44));
     }
 }
 
 /*input filed common style end*/
+/*label style start*/
+label {
+    font-family: 'Josefin Sans', sans-serif;
+}
 
+/*label style end*/
 /*button common style start*/
 /*All button*/
 button {
     border: none !important;
-    border-bottom: 1px solid white !important;
-    border-radius: 1rem !important;
+    border-right: 0.2rem solid white !important;
+    border-bottom: 0.2rem solid white !important;
+    border-radius: 2rem !important;
     text-align: center !important;
     padding: 0.6rem !important;
-    font-style: oblique !important;
-    font-weight: bolder !important;
+    color: white !important;
+    /*    font-style: oblique !important;
+        font-weight: bolder !important;*/
     font-size: 1.5rem !important;
 
 }
 
 button:hover {
-    border-bottom: 2px solid white !important;
+    /*border-bottom: 2px solid white !important;*/
     -webkit-animation: sizeIncrease 5s infinite;
 }
 
@@ -145,3 +166,128 @@ button:hover {
 }
 
 /*Error show box style end */
+
+
+/*Error Message Colour - star*/
+.error {
+    font-family: 'Open Sans', 'Segoe UI';
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--error-color);
+}
+
+#error {
+    text-align: center;
+}
+
+#errorCode {
+    margin-top: 10%;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-style: oblique;
+    font-size: 40px;
+    color: #3299ff;
+    background-color: #ffddca;
+    border-radius: 10px;
+}
+
+#icon {
+    height: 250px;
+    width: 250px;
+    box-shadow: 8px 8px 8px 8px white;
+
+    border-radius: 50%;
+    background: linear-gradient(215deg, #5ca155, #a080c5, #56a4b6, #04c2ec, #f2e053);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    -o-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
+}
+
+#iconIn {
+    font-size: 250px;
+    text-align: center;
+}
+
+#errorMessage {
+    color: var(--error-color);
+    font-size: 20px;
+    font-style: italic;
+    background-color: white;
+    border-radius: 5px 20px 0px 15px;
+}
+
+/*Error Message Colour - end*/
+/*footer copyright start*/
+.footer-copyright {
+    margin-top: 1rem;
+}
+
+/*Table css start */
+table {
+    font-family: sans-serif, serif;
+}
+
+/*Table css end */
+
+/*Dark mode active after style start*/
+html {
+    --text-color-normal: hsl(210, 10%, 62%);
+    --text-color-light: hsl(210, 15%, 35%);
+    --text-color-richer: hsl(210, 50%, 72%);
+    --text-color-highlight: hsl(25, 70%, 45%);
+    --text-color-white: hsl(0, 0%, 100%);
+}
+
+.darkmode--activated p, .darkmode--activated li, .darkmode--activated label {
+    color: var(--text-color-highlight) !important;
+}
+
+.darkmode--activated img {
+    opacity: .75;
+    transition: opacity .5s ease-in-out;
+}
+
+.darkmode--activated img:hover {
+    opacity: 1;
+}
+
+.darkmode--activated table {
+    color: var(--text-color-highlight) !important;
+}
+
+.darkmode--activated table tbody th button{
+    color: var(--text-color-light) !important;
+    font-style: italic;
+}
+
+#scrollableBody {
+    background: var(--text-color-light);
+}
+
+.darkmode--activated .darkmode--activated input[type="button"], .darkmode--activated .darkmode--activated input[type="checkbox"], .darkmode--activated input[type="color"], .darkmode--activated input[type="date"], .darkmode--activated input[type="datetime-local"], .darkmode--activated input[type="email"], .darkmode--activated input[type="file"], .darkmode--activated input[type="hidden"], .darkmode--activated input[type="image"], .darkmode--activated input[type="month"], .darkmode--activated input[type="number"], .darkmode--activated input[type="password"], .darkmode--activated input[type="radio"], .darkmode--activated input[type="range"], .darkmode--activated input[type="reset"], .darkmode--activated input[type="search"], .darkmode--activated input[type="submit"], .darkmode--activated input[type="tel"], .darkmode--activated input[type="text"], .darkmode--activated input[type="time"], .darkmode--activated input[type="url"], .darkmode--activated input[type="week"], .darkmode--activated select, .darkmode--activated textarea {
+    color: var(--text-color-white) !important;
+    background-color: var(--text-color-light) !important;
+}
+
+.darkmode--activated nav{
+    color: var(--text-color-white) !important;
+    background-color: var(--text-color-light) !important;
+}
+.darkmode--activated nav button{
+    color: var(--text-color-highlight) !important;
+    font-style: italic;
+}
+
+@media screen and (prefers-color-scheme: light) {
+    body {
+        background-color: white;
+        color: black;
+    }
+}
+
+/*Dark mode active after style end*/
+
+

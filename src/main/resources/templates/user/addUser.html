@@ -1,201 +1,203 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<!--Page header -->
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
-        <div class="col">
-            <a class="btn btn-primary" href="/home">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
-            </a>
-        </div>
-        <div class="col">
-            <h4 class="text-light text-center">
-                <strong>
-                    <span id="formHeader" data-th-text="${addStatus==true?'New User':'Update User'}"></span>
-                </strong>
-            </h4>
-        </div>
-        <div class="col">
-            <a href="/user" class="btn btn-primary">
-                <i class="fa fa-list"></i>&nbsp; View List
-            </a>
+<br>
+<div class="mt-5 col-12 order-4">
+    <div class="pt-5 container-fluid bg-secondary form-Border">
+        <div class="row text-center formManagement border-info">
+            <div class="col">
+                <a class="btn btn-primary" href="/home">
+                    <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+                </a>
+            </div>
+            <div class="col">
+                <h4 class="text-light text-center">
+                    <strong>
+                        <span data-th-text="${addStatus==true?'New User':'Update User'}" id="formHeader"></span>
+                    </strong>
+                </h4>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="/user">
+                    <i class="fa fa-list"></i>&nbsp; View List
+                </a>
+            </div>
         </div>
     </div>
-</div>
-<!--Employee find-->
-<div class="container-fluid bg-dark formBorder" id="employeeFindForm" data-th-if="${employeeDetailShow==false}">
-    <div class="col-sm-12 flex-column ">
-        <form id="form" method="POST" data-th-action="${'/user/workingPlace'}" data-th-object="${employee}"
-              enctype="multipart/form-data">
-            <div class="form-row">
-                <div class="col-5 flex-column">
-                    <div class="form-group">
-                        <div class="col-4">
-                            <label class="control-label" for="selectParameter">Parameter :</label>
+    <!--/* Employee find */-->
+    <div class="container-fluid bg-dark formBorder" data-th-if="${employeeDetailShow==false}" id="employeeFindForm">
+        <div class="col-sm-12 flex-column ">
+            <form data-th-action="${'/user/workingPlace'}" data-th-object="${employee}" enctype="multipart/form-data"
+                  id="form"
+                  method="POST">
+                <div class="form-row">
+                    <div class="col-5 flex-column">
+                        <div class="form-group">
+                            <div class="col-4">
+                                <label class="control-label" for="selectParameter">Parameter :</label>
+                            </div>
+                            <div class="col-8">
+                                <select class="" id="selectParameter" required tabindex="1">
+                                    <option value="">Please select</option>
+                                    <option value="nic">NIC Number</option>
+                                    <option value="payRoleNumber">Pay Role Number</option>
+                                    <option value="departmentIdNumber">Department Id Number</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <select id="selectParameter" class="" tabindex="1" required>
-                                <option value="">Please select</option>
-                                <option value="nic">NIC Number</option>
-                                <option value="payRoleNumber">Pay Role Number</option>
-                                <option value="departmentIdNumber">Department Id Number</option>
+                    </div>
+                    <div class="col-4 flex-column">
+                        <div class="form-group">
+                            <div class="col-5">
+                                <label class="control-label" for="valueEmployee">Value :</label>
+                            </div>
+                            <div class="col-7">
+                                <input autofocus class="" id="valueEmployee" minlength="3" required
+                                       tabindex="2"
+                                       type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 flex-column">
+                        <div class="form-group">
+                            <div class="">
+                                <div class="col-2">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-10 text-left" id="btnSearchEmployee">
+                                    <button class="btn btn-success" tabindex="3" type="submit">
+                                        <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/* Employee not fount message */-->
+    <div class="alert alert-warning alert-dismissible fade show text-center" data-th-if="${employeeNotFoundShow==true}"
+         id="employeeNotFoundShow" role="alert">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong><span data-th-text="${employeeNotFound}" id="employeeNotFound"></span></strong>
+        <script>
+            $(".alert").alert();
+        </script>
+    </div>
+
+    <!--/* User add from */-->
+    <div class="container-fluid bg-dark formBorder" data-th-if="${employeeDetailShow==true}" id="userFormShow">
+        <form autocomplete="off" class="form-horizontal" data-th-action="${addStatus==true?'/user/add':'/user/update'}"
+              data-th-object="${user}" id="formUser" method="POST">
+            <div class="row">
+                <!--/* Left Side */-->
+                <div class="form-group col-md-5 col-sm-7 text-left flex-column">
+                    <div class="form-row" data-th-if="${addStatus==false}" id="idHide">
+                        <div class="col-md-4">
+                            <label class="control-label" for="id">ID :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="" data-th-field="*{id}" id="id" readonly type="text"/>
+                        </div>
+                    </div>
+                    <!--/* Employee details Display */-->
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label class="control-label" data-th-for="${employee}">Employee :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="" data-th-each="e : ${employee}" data-th-field="*{employee}" name="employee"
+                                    required>
+                                <option data-th-field="*{employee}"
+                                        data-th-text="${e.title.title} + ${' '} + ${e.name} +${' - '} + ${e.nic}"
+                                        data-th-value="${e.id}"
+                                        id="employeeList" value="">Please select
+                                </option>
                             </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 flex-column">
-                    <div class="form-group">
-                        <div class="col-5">
-                            <label class="control-label" for="valueEmployee">Value :</label>
-                        </div>
-                        <div class="col-7">
-                            <input id="valueEmployee" tabindex="2" class="" type="text" minlength="3"
-                                   required
-                                   autofocus/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3 flex-column">
-                    <div class="form-group">
-                        <div class="">
-                            <div class="col-2">
-                                <label class="control-label"></label>
-                            </div>
-                            <div class="col-10 text-left" id="btnSearchEmployee">
-                                <button class="btn btn-success" tabindex="3" type="submit">
-                                    <i class="fa fa-search " style="font-size: 20px"></i>&nbsp; &nbsp;Search
-                                </button>
+                            <div data-th-if="${addStatus==false}">
+                                <strong>
+                                    <span data-th-text="${user.employee.title.title} + ${' '} + ${user.employee.name} +${' - '} + ${user.employee.nic}"></span>
+                                    <input data-th-field="*{employee}" type="hidden">
+                                </strong>
                             </div>
                         </div>
                     </div>
+                    <!--/* User name */-->
+                    <div class="form-row">
+                        <label class="control-label col-md-4" data-th-for="${username}">User Name :</label>
+                        <div class="col-md-8">
+                            <input class="" data-th-field="*{username}" placeholder="Enter User Name Here" required
+                                   type="text"/>
+                        </div>
+                    </div>
+                    <!--/* Password */-->
+                    <div class="form-row">
+                        <label class="control-label col-md-4" data-th-for="${password}">Password :</label>
+                        <div class="col-md-8">
+                            <input class=" pwd" data-th-field="*{password}"
+                                   min="6" placeholder="Enter Password Here" required type="password"
+                            />
+                            <div class="text-right">
+                                <span id="result"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-row alert alert-danger text-center">
+                            <strong>Attention !</strong>
+                            If Employee is belong to supper senior category.
+                            <strong>Please select one or two work station </strong>.
+                        </div>
+                    </div>
                 </div>
+                <!--/* Right Side */-->
+                <div class="form-group col-md-5 col-sm-7 text-left flex-column">
+                    <!--/* Roles Display */-->
+                    <div class="form-row">
+                        <label class="control-label" data-th-for="${roles}">Roles :</label>
+                        <select class="" data-th-field="*{roles}" multiple required size="16">
+                            <option data-th-each="role, rowCount : ${roleList}" data-th-field="*{roles}"
+                                    data-th-text="${rowCount.count} +${'. '}+${role.roleName}"
+                                    data-th-value="${role.id}"
+                                    id="roleList" value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--/* Button */-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column">
+                    <button class="btn btn-success" type="submit">
+                        <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                            data-th-text="${addStatus==true?'Save': 'Update'}"
+                            id="submit">                        </span>
+                    </button>
+                </div>
+            </div>
+            <!--/* Error */-->
+            <div class="form-row">
+                <label data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" id="errorLabel">Errors: </label>
+                <ul>
+                    <li class="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+                        id="errorDisplay"></li>
+                </ul>
             </div>
         </form>
+
+
     </div>
 </div>
-<!--Employee not fount message-->
-<div id="employeeNotFoundShow" data-th-if="${employeeNotFoundShow==true}"
-     class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <strong><span id="employeeNotFound" data-th-text="${employeeNotFound}"></span></strong>
-    <script>
-        $(".alert").alert();
-    </script>
-</div>
-
-<!--User add from-->
-<div class="container-fluid bg-dark formBorder" data-th-if="${employeeDetailShow==true}" id="userFormShow">
-    <form id="formUser" data-th-action="${addStatus==true?'/user/add':'/user/update'}" data-th-object="${user}"
-          class="form-horizontal" method="POST" autocomplete="false">
-        <div class="row">
-            <!--Left Side-->
-            <div class="form-group col-md-5 col-sm-7 text-left flex-column">
-                <div id="idHide" data-th-if="${addStatus==false}" class="form-row">
-                    <div class="col-md-4">
-                        <label class="control-label" for="id">ID :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input class="" data-th-field="*{id}" id="id" type="text" readonly/>
-                    </div>
-                </div>
-                <!--Employee details Display-->
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <label class="control-label" for="employee">Employee :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <select class="" data-th-field="*{employee}" data-th-each="e : ${employee}" name="employee"
-                                id="employee" required>
-                            <option id="employeeList"
-                                    data-th-text="${e.title.title} + ${' '} + ${e.name} +${' - '} + ${e.nic}"
-                                    data-th-value="${e.id}"
-                                    data-th-field="*{employee}" value="">Please select
-                            </option>
-                        </select>
-                        <div id="employeeNameBox" data-th-if="${addStatus==false}">
-                            <strong>
-                                <span id="employeeName"
-                                      data-th-text="${user.employee.title.title} + ${' '} + ${user.employee.name} +${' - '} + ${user.employee.nic}"></span>
-                                <input type="hidden" id="employeeSelected" data-th-field="*{employee}">
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <!--User name-->
-                <div class="form-row">
-                    <label class="control-label col-md-4" for="username">User Name :</label>
-                    <div class="col-md-8">
-                        <input class="" data-th-field="*{username}" id="username"
-                               placeholder="Enter User Name Here" required type="text"/>
-                    </div>
-                </div>
-                <!--Password-->
-                <div class="form-row">
-                    <label class="control-label col-md-4" for="password">Password :</label>
-                    <div class="col-md-8">
-                        <input class=" pwd" id="password" data-th-field="*{password}"
-                               placeholder="Enter Password Here" required type="password" min="6"
-                        />
-                        <div class="text-right">
-                            <span id="result"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-row alert alert-danger text-center">
-                        <strong>Attention !</strong>
-                        If Employee is belong to supper senior category.
-                        <strong>Please select one or two work station </strong>.
-                    </div>
-                </div>
-            </div>
-            <!--Right Side-->
-            <div class="form-group col-md-5 col-sm-7 text-left flex-column">
-                <!--Roles Display-->
-                <div class="form-row">
-                    <label class="control-label" for="roles">Roles :</label>
-                    <select id="roles" data-th-field="*{roles}" class="" size="16" multiple required>
-                        <option id="roleList" data-th-each="role, rowCount : ${roleList}"
-                                data-th-text="${rowCount.count} +${'. '}+${role.roleName}"
-                                data-th-value="${role.id}"
-                                data-th-field="*{roles}" value=""></option>
-                    </select>
-                </div>
-            </div>
-
-            <!--Button-->
-            <div class="form-group col-md-12 col-sm-12 text-center flex-column">
-                <button class="btn btn-success" type="submit">
-                    <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
-                        id="submit" data-th-text="${addStatus==true?'Save': 'Update'}">                        </span>
-                </button>
-            </div>
-        </div>
-        <!--Error-->
-        <div class="form-row">
-            <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors: </label>
-            <ul>
-                <li id="errorDisplay" class="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"></li>
-            </ul>
-        </div>
-    </form>
-
-
-</div>
-
-<!--footer include-->
+<!--/* footer include */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
+<!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
 
