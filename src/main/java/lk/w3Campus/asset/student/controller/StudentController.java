@@ -3,7 +3,7 @@ package lk.w3Campus.asset.student.controller;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import lk.w3Campus.asset.commonAsset.service.implementation.CommonService;
+import lk.w3Campus.asset.commonAsset.service.CommonService;
 import lk.w3Campus.asset.student.entity.Student;
 import lk.w3Campus.asset.student.entity.StudentFiles;
 import lk.w3Campus.asset.student.service.StudentFilesService;

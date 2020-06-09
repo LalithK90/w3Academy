@@ -31,4 +31,5 @@ public class ConformationTokenServiceImpl implements ConformationTokenService {
     public void deleteByConformationToken(ConformationToken conformationToken) {
     conformationTokenDao.delete(conformationToken);
     }
+
 }

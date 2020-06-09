@@ -1,6 +1,7 @@
 package lk.w3Campus.asset.message.controller;
 
-import lk.w3Campus.asset.commonAsset.service.implementation.CommonService;
+
+import lk.w3Campus.asset.commonAsset.service.CommonService;
 import lk.w3Campus.asset.employee.entity.Employee;
 import lk.w3Campus.asset.employee.service.EmployeeService;
 import lk.w3Campus.asset.message.entity.EmailMessage;

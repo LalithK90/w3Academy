@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import java.util.regex.Pattern;
+
 @Service
 public class CommonServiceImpl implements CommonService {
     //common things to employee and offender - start
@@ -76,6 +78,16 @@ public class CommonServiceImpl implements CommonService {
         } else {
             return code+"00001";
         }
+    }
+
+    @Override
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+        Pattern pattern = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pattern.matcher(email).matches();
     }
 
 }

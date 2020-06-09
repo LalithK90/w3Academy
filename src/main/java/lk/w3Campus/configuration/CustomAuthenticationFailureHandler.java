@@ -1,4 +1,4 @@
-package lk.recruitment.management.configuration;
+package lk.w3Campus.configuration;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

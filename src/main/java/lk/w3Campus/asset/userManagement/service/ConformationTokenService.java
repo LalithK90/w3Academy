@@ -1,5 +1,6 @@
 package lk.w3Campus.asset.userManagement.service;
 
+
 import lk.w3Campus.asset.userManagement.entity.ConformationToken;
 
 public interface ConformationTokenService {
@@ -10,4 +11,5 @@ public interface ConformationTokenService {
     ConformationToken findByEmail(String email);
 
     void deleteByConformationToken(ConformationToken conformationToken);
+
 }

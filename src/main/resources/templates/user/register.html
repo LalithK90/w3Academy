@@ -1,52 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--Styles, meta data, and title are included-->
-<head th:replace="~{fragments/header :: headerFragment}">
+<html lang="en">
+<!--/* Styles, meta data, and title are included */-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body style="background-color: #4317ac;">
-
-<div class="limiter">
-    <div class="container-login100">
-        <div class="login100-more" style="background-image: url('../img/newpolice.jpeg');"></div>
-
-        <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-            <form class="login100-form validate-form" action="/register" method="post">
-					<span class="login100-form-title p-b-59">
-						SIGN IN
-					</span>
-                <input type="text" name="newOrOld" th:value="${newOrOld}" hidden required>
-                <div class="wrap-input100 validate-input" data-validate="Email is required">
-                    <span class="label-input100">Email</span>
-                    <input class="input100" type="email" name="email" th:placeholder="${newOrOld=='new'?'Type your Email Here':'Please enter your registered user name '}" required>
-                    <span class="focus-input100"></span>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<br>
+<div class="container-fluid mt-5">
+    <div class="container mt-5 pt-5">
+        <div class="container-fluid">
+            <form class="form" data-th-action="@{/register}" method="post">
+                <span class="h3 font-weight-bold p-5">SIGN IN</span>
+                <input data-th-value="${newOrOld}" hidden name="newOrOld" required type="text">
+                <div class="form-group" data-validate="Email is required">
+                    <input aria-describedby="helpId"
+                           data-th-placeholder="${newOrOld=='new'?'Type your Email Here':'Please enter your registered user name '}" name="email" required type="email">
+                    <small class="form-text text-muted font-italic" id="helpId">Please Enter valid email.</small>
                 </div>
-
-                <div class="row container" style="margin-top:-30px; margin-bottom: 25px;">
-                    <span style="color: red" th:text="${message}"></span>
+                <div class="row container">
+                    <span data-th-text="${message}"></span>
                 </div>
-
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn "></div>
-                        <button class="login100-form-btn" type="submit">
+                <div class="form-row">
+                    <div class="container-fluid">
+                        <button class="btn btn-success" type="submit">
                             Submit
                         </button>
                     </div>
                 </div>
-
             </form>
-
         </div>
-
     </div>
 </div>
-<!--footer is included-->
-</div><!-- content-wrapper end -->
-<footer th:replace="~{fragments/footerSection :: footerSectionFragment}"></footer><!-- footer Section -->
-</div><!-- wrapper end -->
-<script th:replace="~{fragments/scriptSection :: scriptSectionFragment}"></script><!-- script Fragment -->
+<!--/* footer include */-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--/* script include */-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 </body>
 </html>
 

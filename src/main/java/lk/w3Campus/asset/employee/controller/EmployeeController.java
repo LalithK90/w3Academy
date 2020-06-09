@@ -1,7 +1,7 @@
 package lk.w3Campus.asset.employee.controller;
 
 import lk.w3Campus.asset.branch.service.BranchService;
-import lk.w3Campus.asset.commonAsset.service.implementation.CommonService;
+import lk.w3Campus.asset.commonAsset.service.CommonService;
 import lk.w3Campus.asset.employee.entity.Employee;
 import lk.w3Campus.asset.employee.entity.EmployeeFiles;
 import lk.w3Campus.asset.employee.entity.Enum.EmployeeStatus;

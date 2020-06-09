@@ -7,4 +7,6 @@ public interface CommonService {
     void commonEmployeeAndStudent(Model model);
     String commonMobileNumberLengthValidator(String number);
     String numberIncrement(int newNumber, String code);
+
+    boolean isValidEmail(String email);
 }
