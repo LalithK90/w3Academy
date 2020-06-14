@@ -111,7 +111,7 @@
                     <!--/* Employee details Display */-->
                     <div class="form-row">
                         <div class="col-md-4">
-                            <label class="control-label" data-th-for="${employee}">Employee :</label>
+                            <label class="control-label" data-th-for="${'employee'}">Employee :</label>
                         </div>
                         <div class="col-md-8">
                             <select class="" data-th-each="e : ${employee}" data-th-field="*{employee}" name="employee"
@@ -132,7 +132,7 @@
                     </div>
                     <!--/* User name */-->
                     <div class="form-row">
-                        <label class="control-label col-md-4" data-th-for="${username}">User Name :</label>
+                        <label class="control-label col-md-4" data-th-for="${'username'}">User Name :</label>
                         <div class="col-md-8">
                             <input class="" data-th-field="*{username}" placeholder="Enter User Name Here" required
                                    type="text"/>
@@ -140,7 +140,7 @@
                     </div>
                     <!--/* Password */-->
                     <div class="form-row">
-                        <label class="control-label col-md-4" data-th-for="${password}">Password :</label>
+                        <label class="control-label col-md-4" data-th-for="${'password'}">Password :</label>
                         <div class="col-md-8">
                             <input class=" pwd" data-th-field="*{password}"
                                    min="6" placeholder="Enter Password Here" required type="password"
@@ -163,7 +163,7 @@
                 <div class="form-group col-md-5 col-sm-7 text-left flex-column">
                     <!--/* Roles Display */-->
                     <div class="form-row">
-                        <label class="control-label" data-th-for="${roles}">Roles :</label>
+                        <label class="control-label" data-th-for="${'roles'}">Roles :</label>
                         <select class="" data-th-field="*{roles}" multiple required size="16">
                             <option data-th-each="role, rowCount : ${roleList}" data-th-field="*{roles}"
                                     data-th-text="${rowCount.count} +${'. '}+${role.roleName}"

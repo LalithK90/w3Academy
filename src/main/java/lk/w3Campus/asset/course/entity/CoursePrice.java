@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Year;
 
@@ -25,9 +22,9 @@ public class CoursePrice extends AuditEntity {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @DateTimeFormat(pattern = "yyyy")
-    private Year year;
-
-    @Enumerated( EnumType.STRING )
+    @Enumerated(EnumType.STRING)
     private PriceStatus priceStatus;
+
+    @ManyToOne
+    private Course course;
 }

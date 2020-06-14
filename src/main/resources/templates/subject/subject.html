@@ -23,7 +23,7 @@
                            type="text"/>
                     <!--/* Name */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${name}">Name :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'name'}">Name :</label>
                         <input class="col-sm-8 darkmode--activated" data-th-field="*{name}" required
                                tabindex="1" type="text"/>
                         <span class="error" data-th-errors="*{name}"
@@ -36,6 +36,14 @@
                                tabindex="2" type="text"/>
                         <span class="error" data-th-errors="*{code}"
                               data-th-if="${#fields.hasErrors('code')}"></span>
+                    </div>
+                    <!--/* Price */-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'price'}">Price :</label>
+                        <input class="col-sm-8" data-th-field="*{price}"
+                               tabindex="2" type="text"/>
+                        <span class="error" data-th-errors="*{price}"
+                              data-th-if="${#fields.hasErrors('price')}"></span>
                     </div>
                     <!--/* Button */-->
                     <div class="form-group form-row col-12">
@@ -62,6 +70,7 @@
                     <th> Index</th>
                     <th> Name</th>
                     <th> Code</th>
+                    <th> Price</th>
                     <th class="text-center"> Modify</th>
                 </tr>
                 </thead>
@@ -70,6 +79,7 @@
                     <th data-th-text="${rowCount.count}"></th>
                     <th data-th-text="${one.name}"></th>
                     <th data-th-text="${one.code}"></th>
+                    <th data-th-text="${one.price}"></th>
                     <th class="text-center">
                         <a data-th-href="${'/subject/edit/' + one.id}">
                             <button class="btn btn-primary text-center btn-sm mr-2 pr-3">
@@ -118,6 +128,11 @@
                 <div class="form-group form-row col-12">
                     <label class="darkmode--activated col-sm-4">Code :</label>
                     <p class="darkmode--activated col-sm-8"> [[${subjectDetail.code}]]</p>
+                </div>
+                <!--/* Price */-->
+                <div class="form-group form-row col-12">
+                    <label class="darkmode--activated col-sm-4">Price :</label>
+                    <p class="darkmode--activated col-sm-8"> [[${subjectDetail.price}]]</p>
                 </div>
                 <!--/* Included Semester  */-->
                 <div class="form-group form-row col-12" data-th-if="${not #lists.isEmpty(subjectDetail.semesters)}">

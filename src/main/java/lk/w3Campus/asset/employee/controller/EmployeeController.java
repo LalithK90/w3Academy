@@ -23,6 +23,8 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static java.lang.Integer.valueOf;
+
 @RequestMapping("/employee")
 @Controller
 public class EmployeeController {
@@ -51,7 +53,7 @@ public class EmployeeController {
     // Common things for an employee add and update
     private String commonThings(Model model) {
         commonService.commonEmployeeAndStudent(model);
-        model.addAttribute("workingPlaces", branchService.findAll());
+        model.addAttribute("branches", branchService.findAll());
         return "employee/addEmployee";
     }
 
@@ -103,7 +105,6 @@ public class EmployeeController {
     //Employee add and update
     @PostMapping(value = {"/add", "/update"})
     public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model) {
-
         if (result.hasErrors()) {
             model.addAttribute("addStatus", true);
             model.addAttribute("employee", employee);
@@ -122,7 +123,7 @@ public class EmployeeController {
                 if (lastEmployee != null) {
                     input = lastEmployee.getNumber();
                     int employeeNumber =
-                            Integer.valueOf(input.replaceAll("[^0-9]+", "")).intValue() + 1;
+                            Integer.parseInt(input.replaceAll("[^0-9]+", "")) + 1;
                     newEmployeeNumber = commonService.numberIncrement(employeeNumber, code);
 
                 } else {
@@ -186,202 +187,3 @@ public class EmployeeController {
         return "employee/employee-detail";
     }
 }
-//----> Employee details management - end <----//
-
-
-//````````````````````````````````````````````````````````````````````````````//
-
-/*
-//----> EmployeeWorkingPlace - details management - start <----//
-
-    //Send form to add working place before find employee
-    @GetMapping(value = "/workingPlace")
-    public String addEmployeeWorkingPlaceForm(Model model) {
-        model.addAttribute("employee", new Employee());
-        model.addAttribute("employeeDetailShow", false);
-        return "employeeWorkingPlace/addEmployeeWorkingPlace";
-    }
-
-    @GetMapping(value = "/getEmployee")
-    @ResponseBody
-    public MappingJacksonValue getEmployeeByWorkingPlace(@RequestParam("designation") String designation,
-                                                         @RequestParam("id") Long id) {
-        Employee employee = new Employee();
-        employee.setDesignation(Designation.valueOf(designation));
-
-        //MappingJacksonValue
-        List<Employee> employees = employeeService.search(employee);
-        //employeeService.findByWorkingPlace(workingPlaceService.findById(id));
-
-        //Create new mapping jackson value and set it to which was need to filter
-        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(employees);
-
-        //simpleBeanPropertyFilter :-  need to give any id to addFilter method and created filter which was mentioned
-        // what parameter's necessary to provide
-        SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter
-                .filterOutAllExcept("id", "name", "payRoleNumber", "designation");
-        //filters :-  set front end required value to before filter
-
-        FilterProvider filters = new SimpleFilterProvider()
-                .addFilter("Employee", simpleBeanPropertyFilter);
-        //Employee :- need to annotate relevant class with JsonFilter  {@JsonFilter("Employee") }
-        mappingJacksonValue.setFilters(filters);
-
-        return mappingJacksonValue;
-    }
-
-    //Send a searched employee to add working place
-
-    @PostMapping( value = "/workingPlace" )
-    public String addWorkingPlaceEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
-
-        List< Employee > employees = employeeService.search(employee);
-        if ( employees.size() == 1 ) {
-            model.addAttribute("employeeDetailShow", true);
-            model.addAttribute("employeeNotFoundShow", false);
-            model.addAttribute("employeeDetail", employees.get(0));
-            model.addAttribute("files", employeeFilesService.employeeFileDownloadLinks(employee).get(0));
-            model.addAttribute("employeeWorkingPlaceHistoryObject", new EmployeeWorkingPlaceHistory());
-            model.addAttribute("workingPlaceChangeReason", WorkingPlaceChangeReason.values());
-            model.addAttribute("province", Province.values());
-            model.addAttribute("districtUrl", MvcUriComponentsBuilder
-                    .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
-                    .build()
-                    .toString());
-            model.addAttribute("stationUrl", MvcUriComponentsBuilder
-                    .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
-                    .build()
-                    .toString());
-            return "employeeWorkingPlace/addEmployeeWorkingPlace";
-        }
-        model.addAttribute("employee", new Employee());
-        model.addAttribute("employeeDetailShow", false);
-        model.addAttribute("employeeNotFoundShow", true);
-        model.addAttribute("employeeNotFound", "There is not employee in the system according to the provided details" +
-                " \n Could you please search again !!");
-
-        return "employeeWorkingPlace/addEmployeeWorkingPlace";
-    }
-
-    @PostMapping( value = "/workingPlace/add" )
-    public String addWorkingPlaceEmployee(@ModelAttribute( "employeeWorkingPlaceHistory" ) EmployeeWorkingPlaceHistory employeeWorkingPlaceHistory, Model model) {
-        System.out.println(employeeWorkingPlaceHistory.toString());
-        // -> need to write validation before the save working place
-        //before saving set employee current working palace
-        WorkingPlace workingPlace = employeeWorkingPlaceHistory.getWorkingPlace();
-
-        employeeWorkingPlaceHistory.setWorkingPlace(employeeWorkingPlaceHistory.getEmployee().getWorkingPlace());
-        employeeWorkingPlaceHistory.getEmployee().setWorkingPlace(workingPlace);
-
-        employeeWorkingPlaceHistory.setWorkingDuration(dateTimeAgeService.dateDifference(employeeWorkingPlaceHistory.getFrom_place(), employeeWorkingPlaceHistory.getTo_place()));
-        employeeWorkingPlaceHistoryService.persist(employeeWorkingPlaceHistory);
-        return "redirect:/employee";
-    }
-*/
-
-//----> EmployeeWorkingPlace - details management - end <----//
-
-
-/*
- try {
-            List< FileModel > storedFile = new ArrayList< FileModel >();
-
-            for ( MultipartFile file : files ) {
-                FileModel fileModel = fileRepository.findByName(file.getOriginalFilename());
-                if ( fileModel != null ) {
-                    // update new contents
-                    fileModel.setPic(file.getBytes());
-                } else {
-                    fileModel = new FileModel(file.getOriginalFilename(), file.getContentType(), file.getBytes());
-                }
-
-                fileNames.add(file.getOriginalFilename());
-                storedFile.add(fileModel);
-            }
-
-            // Save all Files to database
-            fileRepository.saveAll(storedFile);
-
-            model.addAttribute("message", "Files uploaded successfully!");
-            model.addAttribute("files", fileNames);
-        } catch ( Exception e ) {
-            model.addAttribute("message", "Fail!");
-            model.addAttribute("files", fileNames);
-        }
-
-* */
-
-/*
- public String addEmployee(@Valid @ModelAttribute Employee employee, BindingResult result, Model model,
- RedirectAttributes redirectAttributes) {
-
-        * String newEmployeeNumber = "";
-        String input;
-        if (employeeService.lastEmployee() != null) {
-            input = employeeService.lastEmployee().getNumber();
-            int employeeNumber = Integer.valueOf(input.replaceAll("[^0-9]+", "")).intValue() + 1;
-
-            if ((employeeNumber < 10) && (employeeNumber > 0)) {
-                newEmployeeNumber = "KL000" + employeeNumber;
-            }
-            if ((employeeNumber < 100) && (employeeNumber > 10)) {
-                newEmployeeNumber = "KL00" + employeeNumber;
-            }
-            if ((employeeNumber < 1000) && (employeeNumber > 100)) {
-                newEmployeeNumber = "KL0" + employeeNumber;
-            }
-            if (employeeNumber > 10000) {
-                newEmployeeNumber = "KL" + employeeNumber;
-            }
-        } else {
-            newEmployeeNumber = "KL0001";
-            input = "KL0000";
-        }
-
-
-        if (dateTimeAgeService.getAge(employee.getDateOfBirth()) < 18) {
-            ObjectError error = new ObjectError("dateOfBirth", "Employee must be 18 old ");
-            result.addError(error);
-        }
-        if (result.hasErrors()) {
-                System.out.println("i m here");
-                model.addAttribute("addStatus", true);
-            if (employeeService.lastEmployee() != null) {
-                model.addAttribute("lastEmployee", employeeService.lastEmployee().getPayRoleNumber());
-            }
-
-
-                model.addAttribute("addStatus", true);
-                CommonThings(model);
-                redirectAttributes.addFlashAttribute("employee", employee);
-                redirectAttributes.addFlashAttribute("files", employee.getFiles());
-                return "employee/addEmployee";
-                }
-
-      if (employeeService.isEmployeePresent(employee)) {
-            System.out.println("already on ");
-            User user = userService.findById(userService.findByEmployeeId(employee.getId()));
-            if (employee.getEmployeeStatus() != EmployeeStatus.WORKING) {
-                user.setEnabled(false);
-                employeeService.persist(employee);
-            }
-            System.out.println("update working");
-            user.setEnabled(true);
-            employeeService.persist(employee);
-            return "redirect:/employee";
-        }
-        if (employee.getId() != null) {
-            redirectAttributes.addFlashAttribute("message", "Successfully Add but Email was not sent.");
-            redirectAttributes.addFlashAttribute("alertStatus", false);
-
-            employeeService.persist(employee);
-        }
-
-
-        System.out.println("save no id");
-                System.out.println("Employee come "+employee.toString());
-                //employeeService.persist(employee);
-                return "redirect:/employee";
-                }
-
- */

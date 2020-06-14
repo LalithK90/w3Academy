@@ -40,7 +40,7 @@
                     <!--/* Id */-->
                     <div class="form-row text-right" data-th-if="${addStatus==false}" id="idStatus">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${id}">ID :</label>
+                            <label class="darkmode--activated" data-th-for="${'id'}">ID :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{id}" readonly type="text"/>
@@ -49,7 +49,7 @@
                     <!--/* Tittle  */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${title}">Title :</label>
+                            <label class="darkmode--activated" data-th-for="${'title'}">Title :</label>
                         </div>
                         <div class="col-md-8">
                             <select data-th-field="*{title}" required tabindex="3">
@@ -64,7 +64,7 @@
                     <!--/* Name */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${name}">Name :</label>
+                            <label class="darkmode--activated" data-th-for="${'name'}">Name :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{name}" required tabindex="4" type="text"/>
@@ -75,7 +75,7 @@
                     <!--/* Calling Name */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${callingName}">Calling Name :</label>
+                            <label class="darkmode--activated" data-th-for="${'callingName'}">Calling Name :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{callingName}" minlength="5"
@@ -88,7 +88,7 @@
                     <!--/* Nic */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${nic}">NIC No :</label>
+                            <label class="darkmode--activated" data-th-for="${'nic'}">NIC No :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{nic}" id="nic" maxlength="12" minlength="10" required
@@ -99,7 +99,7 @@
                     <!--/* Gender */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${gender}">Gender :</label>
+                            <label class="darkmode--activated" data-th-for="${'gender'}">Gender :</label>
                         </div>
                         <div class="col-md-8">
                             <select data-th-field="*{gender}" required tabindex="7">
@@ -114,7 +114,7 @@
                     <!--/* Date of birth */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${dateOfBirth}">Birth date :</label>
+                            <label class="darkmode--activated" data-th-for="${'dateOfBirth'}">Birth date :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{dateOfBirth}" id="dateOfBirth" placeholder="Ex: 1990 - 01 - 20"
@@ -123,26 +123,10 @@
                                   data-th-errors="*{dateOfBirth}" data-th-if="${#fields.hasErrors('dateOfBirth')}">Error Birthday</span>
                         </div>
                     </div>
-                    <!--/* Blood group */-->
+                                       <!--/* Designation */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${bloodGroup}">Blood Group :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select data-th-field="*{bloodGroup}" required tabindex="9">
-                                <option value="">Please select</option>
-                                <option data-th-each="bloodGroups : ${bloodGroup}"
-                                        data-th-text="${bloodGroups.bloodGroup}"
-                                        data-th-value="${bloodGroups}">Please select
-                                </option>
-                            </select>
-                            <!--  data-th-selected="${bloodGroups==student.bloodGroup?'selected':'unselected'}"-->
-                        </div>
-                    </div>
-                    <!--/* Designation */-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${designation}">Designation :</label>
+                            <label class="darkmode--activated" data-th-for="${'designation'}">Designation :</label>
                         </div>
                         <div class="col-md-8">
                             <select data-th-field="*{designation}" required tabindex="10">
@@ -160,7 +144,7 @@
                     <!--/* Civil status */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${civilStatus}">Civil State :</label>
+                            <label class="darkmode--activated" data-th-for="${'civilStatus'}">Civil State :</label>
                         </div>
                         <div class="col-md-8">
                             <select data-th-field="*{civilStatus}" id="civilStatus" required tabindex="11">
@@ -175,7 +159,7 @@
                     <!--/* Address */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${address}">Address :</label>
+                            <label class="darkmode--activated" data-th-for="${'address'}">Address :</label>
                         </div>
                         <div class="col-md-8">
                             <textarea data-th-field="*{address}" required tabindex="12"></textarea>
@@ -186,7 +170,7 @@
                     <!--/* Mobile Number One */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${mobileOne}">Mobile One No :</label>
+                            <label class="darkmode--activated" data-th-for="${'mobileOne'}">Mobile One No :</label>
                         </div>
                         <div class="col-md-8">
                             <input class=" mobile" data-th-field="*{mobileOne}" id="mobileOne" maxlength="10" min="9"
@@ -198,7 +182,7 @@
                     <!--/* Mobile Number Two */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${mobileTwo}">Mobile Two No :</label>
+                            <label class="darkmode--activated" data-th-for="${'mobileTwo'}">Mobile Two No :</label>
                         </div>
                         <div class="col-md-8">
                             <input class=" mobile" data-th-field="*{mobileTwo}" id="mobileTwo" maxlength="10" min="9"
@@ -210,7 +194,7 @@
                     <!--/* Land Number */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${land}">Land No :</label>
+                            <label class="darkmode--activated" data-th-for="${'land'}">Land No :</label>
                         </div>
                         <div class="col-md-8">
                             <input class="land" data-th-field="*{land}" maxlength="10" min="9" tabindex="15"
@@ -222,7 +206,7 @@
                     <!--/* Email */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${email}">Email :</label>
+                            <label class="darkmode--activated" data-th-for="${'email'}">Email :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{email}" required tabindex="16" type="email"/>
@@ -233,7 +217,7 @@
                     <!--/* Office email */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${officeEmail}">Office Email :</label>
+                            <label class="darkmode--activated" data-th-for="${'officeEmail'}">Office Email :</label>
                         </div>
                         <div class="col-md-8">
                             <input data-th-field="*{officeEmail}" required tabindex="17" type="email"/>
@@ -244,7 +228,7 @@
                     <!--/* Date of assignment */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${dateOfAssignment}">Date Of Assignment
+                            <label class="darkmode--activated" data-th-for="${'dateOfAssignment'}">Date Of Assignment
                                 :</label>
                         </div>
                         <div class="col-md-8">
@@ -257,7 +241,7 @@
                     <!--/* Student status */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${studentStatus}">Student Status :</label>
+                            <label class="darkmode--activated" data-th-for="${'studentStatus'}">Student Status :</label>
                         </div>
                         <div class="col-md-8">
                             <select data-th-field="*{studentStatus}" required tabindex="19">
@@ -272,7 +256,7 @@
                     <!--/* Current Working Place */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${workingPlace}">Student Working Place
+                            <label class="darkmode--activated" data-th-for="${'workingPlace'}">Student Working Place
                                 :</label>
                         </div>
                         <div class="col-md-8">
@@ -288,7 +272,7 @@
                     <div data-th-if="${addStatus==false}" id="updateStatus">
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="darkmode--activated" data-th-for="${createdBy}">Created By :</label>
+                                <label class="darkmode--activated" data-th-for="${'createdBy'}">Created By :</label>
                             </div>
                             <div class="col-md-8">
                                 <input data-th-field="*{createdBy}" readonly type="text"/>
@@ -296,7 +280,7 @@
                         </div>
                         <div class="form-row text-right">
                             <div class="col-md-4">
-                                <label class="darkmode--activated" data-th-for="${createdAt}">Created At :</label>
+                                <label class="darkmode--activated" data-th-for="${'createdAt'}">Created At :</label>
                             </div>
                             <div class="col-md-8">
                                 <input data-th-text="${{createdAt}}" readonly type="text"/>

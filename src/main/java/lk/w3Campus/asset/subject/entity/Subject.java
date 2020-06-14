@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,9 @@ public class Subject extends AuditEntity {
     @NotNull
     @Column(unique = true, nullable = false)
     private String code, name;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
 
     @OneToMany(mappedBy = "subject")
     private List<Semester> semesters;

@@ -6,8 +6,7 @@ import lk.w3Campus.asset.commonAsset.model.Enum.CivilStatus;
 import lk.w3Campus.asset.commonAsset.model.Enum.Gender;
 import lk.w3Campus.asset.commonAsset.model.Enum.Title;
 import lk.w3Campus.asset.commonAsset.model.FileInfo;
-import lk.w3Campus.asset.course.entity.BranchCourse;
-import lk.w3Campus.asset.course.entity.EmployeeCourse;
+import lk.w3Campus.asset.course.entity.EmployeeBranchCourse;
 import lk.w3Campus.asset.employee.entity.Enum.Designation;
 import lk.w3Campus.asset.employee.entity.Enum.EmployeeStatus;
 import lk.w3Campus.asset.message.entity.EmailMessage;
@@ -95,10 +94,7 @@ public class Employee extends AuditEntity {
     private List<SubjectEmployee> subjectEmployees;
 
     @OneToMany(mappedBy = "employee")
-    private List<EmployeeCourse> employeeCourses;
-
-    @OneToMany(mappedBy = "employee")
-    private List<BranchCourse> branchCourses;
+    private List<EmployeeBranchCourse> employeeBranchCourses;
 
     @ManyToOne
     private Branch branch;

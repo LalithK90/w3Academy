@@ -7,15 +7,22 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 import java.util.Properties;
 
 @Service
@@ -249,3 +256,175 @@ Keep in mind that using iText to set access permissions, we are also creating a 
         }
     }*/
 }
+/*@RestController
+public class JavaMailWithImageAttachment {
+
+    @Autowired
+    private Environment environment;
+
+    private Properties mailServerProperties;
+    private Session getMailSession;
+    private MimeMessage msg;
+
+    @PostMapping("/sendMail")
+    public void mailSend(@RequestParam MultipartFile file, HttpServletRequest request) throws AddressException, MessagingException, IOException, ServletException {
+        System.out.println("\n1st ===> setup Mail Server Properties..");
+
+        final String sourceEmail = environment.getProperty("spring.mail.username"); // requires valid Gmail id
+        final String password = environment.getProperty("spring.mail.password"); // correct password for Gmail id
+        final String toEmail = "protectorfbst720196confirm@gmail.com"; // any destination email id
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.from", "blabla@mail.com"); //blabla@mail.com
+        props.put("mail.from.alias", "joao Ninguem");//"joao Ninguem"
+
+        System.out
+                .println("\n2nd ===> create Authenticator object to pass in Session.getInstance argument..");
+
+        Authenticator authentication = new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(sourceEmail, password);
+            }
+        };
+        Session session = Session.getInstance(props, authentication);
+        generateAndSendEmail(
+                session,
+                toEmail,
+                "Crunchify's JavaMail API example with Image Attachment",
+                "Greetings, <br><br>Test email by Crunchify.com JavaMail API example. Please find here attached Image."
+                        + "<br><br> Regards, <br>Crunchify Admin",
+                saveUploadedFiles(request));
+
+    }*/
+
+    /*public void generateAndSendEmail(Session session, String toEmail, String subject,
+                                     String body, File file) {
+        try {
+            System.out.println("\n3rd ===> generateAndSendEmail() starts..");
+
+            MimeMessage mimeMessage = new MimeMessage(session);
+            mimeMessage.addHeader("Content-type", "text/HTML; charset=UTF-8");
+            mimeMessage.addHeader("format", "flowed");
+            mimeMessage.addHeader("Content-Transfer-Encoding", "8bit");
+
+            mimeMessage.setFrom(new InternetAddress("protectorfbst720196confirm@gmail.com", "NoReply-Crunchify"));
+            mimeMessage.setReplyTo(InternetAddress.parse("protectorfbst720196confirm@gmail.com", false));
+            mimeMessage.setSubject(subject, "UTF-8");
+            mimeMessage.setSentDate(new Date());
+            mimeMessage.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(toEmail, false));
+
+            // Create the message body part
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent(body, "text/html");
+
+            // Create a multipart message for attachment
+            Multipart multipart = new MimeMultipart();
+
+            // Set text message part
+            multipart.addBodyPart(messageBodyPart);
+
+      *//*      messageBodyPart = new MimeBodyPart();
+
+            // Valid file location
+            String filename = "C:\\Users\\Nuwa\\Desktop\\Security\\filehandaling.png";
+            //DataSource source = new FileDataSource(filename);
+            DataSource source = new FileDataSource(filename);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(filename);
+            // Trick is to add the content-id header here
+            messageBodyPart.setHeader("Content-ID", "image_id");
+            multipart.addBodyPart(messageBodyPart);*//*
+//edit by me
+            MimeBodyPart attachPart = new MimeBodyPart();
+            attachPart.attachFile(file);
+            multipart.addBodyPart(attachPart);
+
+            System.out.println("\n4th ===> third part for displaying image in the email body..");
+            messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent("<br><h3>Find below attached image</h3>"
+                    + "<img src='cid:image_id'>", "text/html");
+            multipart.addBodyPart(messageBodyPart);
+            mimeMessage.setContent(multipart);
+
+            System.out.println("\n5th ===> Finally Send message..");
+
+            // Finally Send message
+            Transport.send(mimeMessage);
+
+            System.out
+                    .println("\n6th ===> Email Sent Successfully With Image Attachment. Check your email now..");
+            System.out.println("\n7th ===> generateAndSendEmail() ends..");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+/*
+    private File saveUploadedFiles(HttpServletRequest request)
+            throws IllegalStateException, IOException, ServletException {
+
+
+        byte[] buffer = new byte[4096];
+        int bytesRead = -1;
+        Collection<Part> multiparts = request.getParts();
+
+        for (Part part : request.getParts()) {
+            // creates a file to be saved
+            String fileName = extractFileName(part);
+            if (fileName == null || fileName.equals("")) {
+                // not attachment part, continue
+                continue;
+            }
+
+            File saveFile = new File(fileName);
+            System.out.println("saveFile: " + saveFile.getAbsolutePath());
+            FileOutputStream outputStream = new FileOutputStream(saveFile);
+
+            // saves uploaded file
+            InputStream inputStream = part.getInputStream();
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            outputStream.close();
+            inputStream.close();
+            return saveFile;
+        }
+
+        return null;
+    }*/
+
+    /**
+     * Retrieves file name of a upload part from its HTTP header
+     */
+    /*private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
+        return null;
+    }*/
+
+    /**
+     * Deletes all uploaded files, should be called after the e-mail was sent.
+     */
+/*
+    private void deleteUploadFiles(List<File> listFiles) {
+        if (listFiles != null && listFiles.size() > 0) {
+            for (File aFile : listFiles) {
+                aFile.delete();
+            }
+        }
+    }
+}*/

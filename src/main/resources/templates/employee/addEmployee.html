@@ -38,31 +38,27 @@
                 <div class="col-md-6 col-sm-6 text-left flex-column">
                     <!--/* Id   */-->
                     <div class="form-group form-row col-12" data-th-if="${addStatus==false}">
-                        <label class="darkmode--activated col-sm-4 text-right" data-th-for="${id}"> ID : </label>
+                        <label class="darkmode--activated col-sm-4 text-right" data-th-for="${'id'}"> ID : </label>
                         <input class="col-sm-8" data-th-field="*{id}" readonly type="text"/>
                     </div>
-                    <!--/* Tittle  */-->
+                    <!--/* Name */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${title}">Title : </label>
-                        <select class="col-sm-8" data-th-field="*{title}" required tabindex="3">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'name'}">Name :</label>
+                        <!--/* Tittle  */-->
+                        <select class="col-sm-2" data-th-field="*{title}" required tabindex="3">
                             <option disabled selected value="">Please select</option>
                             <option data-th-each="titles : ${title}"
                                     data-th-text="${titles.title}"
                                     data-th-value="${titles}"></option>
-
-                            <!--/*        data-th-selected="${titles==employee.title?'selected':'unselected'}" */-->
                         </select>
-                    </div>
-                    <!--/* Name */-->
-                    <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${name}">Name :</label>
-                        <input class="col-sm-8" data-th-field="*{name}" required tabindex="4" type="text"/>
+                        <input class="col-sm-6" data-th-field="*{name}" required tabindex="4" type="text"/>
                         <span class="error" data-th-errors="*{name}"
                               data-th-if="${#fields.hasErrors('name')}"></span>
                     </div>
                     <!--/* Calling Name */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${callingName}">Calling Name :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'callingName'}">Calling Name
+                            :</label>
                         <input class="col-sm-8" data-th-field="*{callingName}" minlength="5"
                                tabindex="5" type="text"/>
                         <span class="error" data-th-errors="*{callingName}"
@@ -70,14 +66,14 @@
                     </div>
                     <!--/* Nic */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${nic}">NIC No :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'nic'}">NIC No :</label>
                         <input class="col-sm-8" data-th-field="*{nic}" maxlength="12" minlength="10"
                                required tabindex="6" type="text"/>
                         <span class="error" data-th-errors="*{nic}" data-th-if="${#fields.hasErrors('nic')}"></span>
                     </div>
                     <!--/* Gender */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${gender}">Gender :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'gender'}">Gender :</label>
                         <select class="col-md-8" data-th-field="*{gender}" required tabindex="7">
                             <option disabled selected value="">Please select</option>
                             <option data-th-each="genders : ${gender}"
@@ -88,27 +84,15 @@
                     </div>
                     <!--/* Date of birth */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${dateOfBirth}">Birth date :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'dateOfBirth'}">Birth date :</label>
                         <input class="col-md-8" data-th-field="*{dateOfBirth}" id="dateOfBirth"
                                placeholder="Ex: 1990 - 01 - 20" required tabindex="8" type="date"/>
                         <span class="error" data-th-errors="*{dateOfBirth}"
                               data-th-if="${#fields.hasErrors('dateOfBirth')}"></span>
                     </div>
-                    <!--/* Blood group */-->
-                    <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" for="bloodGroup">Blood Group :</label>
-                        <select class="col-md-8" data-th-field="*{bloodGroup}" id="bloodGroup" required tabindex="9">
-                            <option disabled selected value="">Please select</option>
-                            <option data-th-each="bloodGroups : ${bloodGroup}"
-                                    data-th-text="${bloodGroups.bloodGroup}"
-                                    data-th-value="${bloodGroups}">
-                                <!--/*       data-th-selected="${bloodGroups==employee.bloodGroup?'selected':'unselected'}" */-->
-                            </option>
-                        </select>
-                    </div>
                     <!--/* Designation */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${designation}">Designation :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'designation'}">Designation :</label>
                         <select class="col-md-8" data-th-field="*{designation}" required tabindex="10">
                             <option disabled selected value="">Please select</option>
                             <option data-th-each="designations : ${designation}"
@@ -122,8 +106,8 @@
                 <div class="form-group col-md-6 col-sm-6 text-right flex-column">
                     <!--/* Civil status */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${civilStatus}">Civil State :</label>
-                        <select class="col-md-8" data-th-field="*{civilStatus}" id="civilStatus" required tabindex="11">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'civilStatus'}">Civil State :</label>
+                        <select class="col-md-8" data-th-field="*{civilStatus}" required tabindex="11">
                             <option disabled selected value="">Please select</option>
                             <option data-th-each="civilState : ${civilStatus}"
                                     data-th-text="${civilState.CivilStatus}"
@@ -133,7 +117,7 @@
                     </div>
                     <!--/* Address */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${address}">Address :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'address'}">Address :</label>
                         <textarea class="col-md-8" data-th-field="*{address}" required
                                   tabindex="12"></textarea>
                         <span class="error" data-th-errors="*{address}"
@@ -141,7 +125,7 @@
                     </div>
                     <!--/* Mobile Number One */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${mobileOne}">Mobile One No :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'mobileOne'}">Mobile One No :</label>
                         <input class="col-md-8 mobile" data-th-field="*{mobileOne}" maxlength="10"
                                min="9"
                                required tabindex="13"
@@ -151,7 +135,7 @@
                     </div>
                     <!--/* Mobile Number Two */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${mobileTwo}">Mobile Two No :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'mobileTwo'}">Mobile Two No :</label>
                         <input class="col-md-8 mobile" data-th-field="*{mobileTwo}" maxlength="10"
                                min="9"
                                tabindex="14" type="tel"/>
@@ -160,7 +144,7 @@
                     </div>
                     <!--/* Land Number */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${land}">Land No :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'land'}">Land No :</label>
                         <input class="col-md-8 land" data-th-field="*{land}" maxlength="10" min="9"
                                tabindex="15"
                                type="tel"/>
@@ -169,7 +153,7 @@
                     </div>
                     <!--/* Email */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${email}">Email :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'email'}">Email :</label>
                         <input class="col-md-8" data-th-field="*{email}" required tabindex="16"
                                type="email"/>
                         <span class="error" data-th-errors="*{email}"
@@ -177,14 +161,16 @@
                     </div>
                     <!--/* Office email */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${officeEmail}">Office Email :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'officeEmail'}">Office Email
+                            :</label>
                         <input class="col-md-8" data-th-field="*{officeEmail}" required tabindex="17" type="email"/>
                         <span class="error" data-th-errors="*{officeEmail}"
                               data-th-if="${#fields.hasErrors('officeEmail')}"></span>
                     </div>
                     <!--/* Date of assignment */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${dateOfAssignment}">Date Of Assignment
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'dateOfAssignment'}">Date Of
+                            Assignment
                             :</label>
                         <input class="col-md-8" data-th-field="*{{dateOfAssignment}}" placeholder="Ex: 1990 - 01 - 20"
                                required tabindex="18" type="date"/>
@@ -193,7 +179,7 @@
                     </div>
                     <!--/* Employee status */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${employeeStatus}">Employee Status
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'employeeStatus'}">Employee Status
                             :</label>
                         <select class="col-md-8" data-th-field="*{employeeStatus}" required
                                 tabindex="19">
@@ -206,23 +192,24 @@
                     </div>
                     <!--/* Current Working Place */-->
                     <div class="form-group form-row col-12">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${workingPlace}">Employee Working Place
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'workingPlace'}">Employee Working
+                            Place
                             :</label>
-                        <select class="col-md-8" data-th-field="*{workingPlace}" id="workingPlace" required
+                        <select class="col-md-8" data-th-field="*{branch}" required
                                 tabindex="20">
                             <option disabled selected value="">Please select</option>
-                            <option data-th-each="workingPlace : ${workingPlaces}"
-                                    data-th-text="${workingPlace.name}"
-                                    data-th-value="${workingPlace.id}"></option>
+                            <option data-th-each="branch : ${branches}"
+                                    data-th-text="${branch.name}"
+                                    data-th-value="${branch.id}"></option>
                         </select>
                     </div>
                     <!--/* Created by and created at */-->
                     <div class="form-group form-row col-12" data-th-if="${addStatus==false}">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${createdBy}">Created By :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'createdBy'}">Created By :</label>
                         <input class="col-md-8" data-th-field="*{createdBy}" readonly type="text"/>
                     </div>
                     <div class="form-group form-row col-12" data-th-if="${addStatus==false}">
-                        <label class="darkmode--activated col-sm-4" data-th-for="${createdAt}">Created At :</label>
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'createdAt'}">Created At :</label>
                         <input class="col-md-8" data-th-text="${{createdAt}}" readonly type="text"/>
                     </div>
                 </div>

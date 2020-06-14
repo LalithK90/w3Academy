@@ -18,13 +18,13 @@ import javax.persistence.ManyToOne;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeCourse extends AuditEntity {
+public class EmployeeBranchCourse extends AuditEntity {
 
     @Enumerated(EnumType.STRING)
     private CourseEmployeeStatus courseEmployeeStatus;
 
     @ManyToOne
-    private CourseDetail courseDetail;
+    private BranchCourse branchCourse;
 
     @ManyToOne
     private Employee employee;

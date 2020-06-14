@@ -22,7 +22,6 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final String[] ALL_PERMIT_URL = {"/favicon.ico", "/img/**", "/css/**", "/js/**", "/webjars/**",
             "/login", "/select/**", "/", "/index", "/register/**", "/forgottenPassword"};
 
@@ -78,9 +77,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-          /*  http.csrf().disable();
-            http.authorizeRequests().antMatchers("/").permitAll();*/
+            http.csrf().disable();
+            http.authorizeRequests().antMatchers("/").permitAll();
         // For developing easy to give permission all lin
+/*
 
         http
                 .authorizeRequests(
@@ -132,11 +132,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                         .migrateSession()
                                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                                         .invalidSessionUrl("/login")
-                                        .maximumSessions(2)
-                                        .sessionRegistry(sessionRegistry()))
+                        //.maximumSessions(2)
+                        //.sessionRegistry(sessionRegistry())
+                )
                 //Cross site disable
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling();
+*/
     }
 }
 
