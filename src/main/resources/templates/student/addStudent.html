@@ -10,7 +10,7 @@
 <div class="mt-5 col-12 order-4">
     <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-primary" data-th-href="@{'/home'}">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
@@ -22,14 +22,14 @@
             </h4>
         </div>
         <div class="col">
-            <a class="btn btn-primary" href="/student">
+            <a class="btn btn-primary" data-th-href="@{'/student'}">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
     </div>
 </div>
 <!--/* Form Content - start  */-->
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <form class="form-horizontal" data-th-action="${addStatus==true?'/student/add':'/student/update'}"
               data-th-object="${student}"
@@ -81,8 +81,7 @@
                             <input data-th-field="*{callingName}" minlength="5"
                                    tabindex="5" type="text"/>
                             <span class="error" data-th-errors="*{callingName}"
-                                  data-th-if="${#fields.hasErrors('callingName')}">Error
-                                                                       Calling                                                                                                                        Name</span>
+                                  data-th-if="${#fields.hasErrors('callingName')}">Error                                                                       Calling                                                                                                                        Name</span>
                         </div>
                     </div>
                     <!--/* Nic */-->
@@ -91,7 +90,7 @@
                             <label class="darkmode--activated" data-th-for="${'nic'}">NIC No :</label>
                         </div>
                         <div class="col-md-8">
-                            <input data-th-field="*{nic}" id="nic" maxlength="12" minlength="10" required
+                            <input data-th-field="*{nic}" id="nic" maxlength="12" minlength="10"
                                    tabindex="6" type="text"/>
                             <span class="error" data-th-errors="*{nic}" data-th-if="${#fields.hasErrors('nic')}">Error                                                               NIC Number</span>
                         </div>
@@ -123,37 +122,35 @@
                                   data-th-errors="*{dateOfBirth}" data-th-if="${#fields.hasErrors('dateOfBirth')}">Error Birthday</span>
                         </div>
                     </div>
-                                       <!--/* Designation */-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'designation'}">Designation :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select data-th-field="*{designation}" required tabindex="10">
-                                <option value="">Please select</option>
-                                <option data-th-each="designations : ${designation}"
-                                        data-th-text="${designations.designation}"
-                                        data-th-value="${designations}"></option>
-                            </select>
-                            <!--  data-th-selected="${designations==student.designation?'selected':'unselected'}"-->
-                        </div>
-                    </div>
                 </div>
                 <!--/* Right Side */-->
                 <div class="form-group col-md-6 col-sm-6 text-right flex-column">
-                    <!--/* Civil status */-->
+                    <!--/* Bit registration number */-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'civilStatus'}">Civil State :</label>
+                            <label class="darkmode--activated" data-th-for="${'bitRegNumber'}">BIT Registration Number
+                                :</label>
                         </div>
                         <div class="col-md-8">
-                            <select data-th-field="*{civilStatus}" id="civilStatus" required tabindex="11">
-                                <option value="">Please select</option>
-                                <option data-th-each="civilState : ${civilStatus}"
-                                        data-th-text="${civilState.CivilStatus}"
-                                        data-th-value="${civilState}"></option>
-                            </select>
-                            <!--  data-th-selected="${civilStatu==student.civilStatus?'selected':'unselected'}"-->
+                            <input data-th-field="*{bitRegNumber}" required tabindex="11" type="text"/>
+                            <span class="error" data-th-errors="*{bitRegNumber}"
+                                  data-th-if="${#fields.hasErrors('bitRegNumber')}">Error
+                                                                       Calling                                                                                                                        Name</span>
+
+                        </div>
+                    </div>
+                    <!--/* Bit Index number */-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="darkmode--activated" data-th-for="${'bitIndexNumber'}">BIT Index Number
+                                :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input data-th-field="*{bitIndexNumber}" required tabindex="11" type="text"/>
+                            <span class="error" data-th-errors="*{bitIndexNumber}"
+                                  data-th-if="${#fields.hasErrors('bitIndexNumber')}">Error
+                                                                       Calling                                                                                                                        Name</span>
+
                         </div>
                     </div>
                     <!--/* Address */-->
@@ -214,32 +211,8 @@
                                   data-th-if="${#fields.hasErrors('email')}">Error Email</span>
                         </div>
                     </div>
-                    <!--/* Office email */-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'officeEmail'}">Office Email :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input data-th-field="*{officeEmail}" required tabindex="17" type="email"/>
-                            <span class="error" data-th-errors="*{officeEmail}"
-                                  data-th-if="${#fields.hasErrors('officeEmail')}">Error Office Email</span>
-                        </div>
-                    </div>
-                    <!--/* Date of assignment */-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'dateOfAssignment'}">Date Of Assignment
-                                :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input data-th-field="*{{dateOfAssignment}}" placeholder="Ex: 1990 - 01 - 20" required
-                                   tabindex="18" type="date"/>
-                            <span class="error" data-th-errors="*{dateOfAssignment}"
-                                  data-th-if="${#fields.hasErrors('dateOfAssignment')}">Error Date Of Assignment</span>
-                        </div>
-                    </div>
                     <!--/* Student status */-->
-                    <div class="form-row text-right">
+                    <div class="form-row text-right" data-th-if="${addStatus==false}">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'studentStatus'}">Student Status :</label>
                         </div>
@@ -251,21 +224,6 @@
                                         data-th-value="${studentStatuss}"></option>
                             </select>
                             <!--/*  data-th-selected="${studentStatuss==student.studentStatus?'selected':'unselected'}" */-->
-                        </div>
-                    </div>
-                    <!--/* Current Working Place */-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'workingPlace'}">Student Working Place
-                                :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select data-th-field="*{workingPlace}" required tabindex="20">
-                                <option value="">Please select</option>
-                                <option data-th-each="workingPlace : ${workingPlaces}"
-                                        data-th-text="${workingPlace.name}"
-                                        data-th-value="${workingPlace.id}"></option>
-                            </select>
                         </div>
                     </div>
                     <!--/* Created by and created at */-->
@@ -288,46 +246,17 @@
                         </div>
                     </div>
                 </div>
+                <!--/*button and photo Details*/-->
                 <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div class="input-field">
-                        <label class="darkmode--activated">Photos :</label>
-                        <label class="darkmode--activated">Please remove numbers where included in image number </label>
-                        <div class="input-images" style="padding-top: .5rem;"></div>
+                    <div>
+                        <label class="darkmode--activated">Photo Details : </label>
                     </div>
-                    <div class="col" data-th-if="${addStatus==false}" id="photoDetails">
-                        <div>
-                            <label class="darkmode--activated">Photo Details : </label>
-                        </div>
-                        <div class="row">
-                            <div class="col" data-th-each="file, rowStat: ${files}" id="filesList">
-                                <div class="col">
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <button aria-label="Close" class="close" data-dismiss="alert" id="alertClose"
-                                                type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <div class="card text-center">
-                                            <div class="card-header" hidden>
-                                                <input data-th-value="${file.filename}" id="removeImages"
-                                                       name="removeImages"
-                                                       type="text"></div>
-                                            <div class="card-body">
-                                                <img alt="" class="rounded" data-th-src="${file.url}" id="img"
-                                                     src=""
-                                                     style="height: 150px; width: 150px; border-radius: 10px"/>
-                                            </div>
-                                            <div class="card-footer bg-secondary text-light text-center">
-                                                <p data-th-text="${file.filename}" id="imgName"></p>
-                                                <p> Uploaded Date : <span data-th-text="${{file.createAt}}"
-                                                                          id="imgCreateAt"></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <script>
-                                    $(".alert").alert();
-                                </script>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input accept="image/png, image/jpeg" id="imgUpload" name="file"
+                                   type="file">
+                            <div class="col-md-3 ">
+                                <img alt="" id="image" src="" style="height: 100px;">
                             </div>
                         </div>
                     </div>
@@ -339,11 +268,12 @@
                         </button>
                     </div>
                 </div>
+                <!--/*Error all display*/-->
                 <div class="form-row">
                     <label class="darkmode--activated" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '"
                            id="errorLabel">Errors: </label>
                     <ul>
-                        <li class="darkmode--activated" class="error" data-th-each="err: ${#fields.errors('*')}"
+                        <li class="darkmode--activated error" data-th-each="err: ${#fields.errors('*')}"
                             data-th-text="${err}" id="error"></li>
                     </ul>
                 </div>
@@ -356,8 +286,5 @@
 <!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
-<script>
-    $('.input-images').imageUploader();
-</script>
 </body>
 </html>

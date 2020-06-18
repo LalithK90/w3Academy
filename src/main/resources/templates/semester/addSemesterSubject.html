@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--Styles, meta data, and title are included-->
+<!--/* Styles, meta data, and title are included */-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<!--Nav bar is included-->
+<!--/* Nav bar is included */-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-<br>
-<div class="container mt-5 pt-5">
-    <p data-th-text="${successMessage}"></p>
-    <a data-th-href="@{'/home'}">
-        <button class="btn btn-primary">Login</button>
-    </a>
-</div>
-<!--/* footer include */-->
+
+
+<!--/* footer is */-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--/* script include */-->
+<!--/* script is included */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 </body>
 </html>

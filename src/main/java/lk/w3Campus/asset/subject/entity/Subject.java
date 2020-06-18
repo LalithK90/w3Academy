@@ -2,13 +2,13 @@ package lk.w3Campus.asset.subject.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.w3Campus.asset.semester.entity.Semester;
 import lk.w3Campus.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -30,8 +30,8 @@ public class Subject extends AuditEntity {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "subject")
-    private List<Semester> semesters;
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE})
+    private List<SubjectSemester> subjectSemesters;
 
     @OneToMany(mappedBy = "subject")
     private List<SubjectEmployee> subjectEmployees;

@@ -117,7 +117,7 @@
                         <label class="darkmode--activated col-sm-4" data-th-for="${'priceStatus'}">Price Status :</label>
                         <select class="col-sm-8" data-th-field="*{priceStatus}"
                                 tabindex="1" type="text">
-                            <option value="" selected disabled>Please Select</option>
+                            <option value="" disabled>Please Select</option>
                             <option data-th-each="priceStatus : ${priceStatuses}"
                             data-th-value="${priceStatus}"
                             data-th-text="${priceStatus.priceStatus}"></option>

@@ -14,15 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.TimeZone;
 
 @Configuration
-@EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
 
     @Override
@@ -30,7 +29,7 @@ public class MvcConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-    @Override
+    /*@Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
                 .setViewName("forward:/login");
@@ -52,13 +51,13 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     //Bean configuration
-    @Bean
+  *  @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/resources/templates/");
         resolver.setSuffix(".html");
         return resolver;
-    }
+    }*/
 
     //time zone set to
     @Bean
@@ -84,8 +83,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
         private Logger logger = LoggerFactory.getLogger(ErrorController.class);
 
-        @ExceptionHandler( Throwable.class )
-        @ResponseStatus( HttpStatus.INTERNAL_SERVER_ERROR )
+        @ExceptionHandler(Throwable.class)
+        @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
         public String exception(final Throwable throwable, Model model) {
             logger.error("Exception during execution of SpringSecurity application", throwable);
             String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");

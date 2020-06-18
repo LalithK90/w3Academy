@@ -10,7 +10,7 @@
 <div class="mt-5 col-12 order-4">
     <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-primary" data-th-href="@{'/home'}">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
@@ -22,7 +22,7 @@
             </h4>
         </div>
         <div class="col">
-            <a class="btn btn-primary" href="/employee">
+            <a class="btn btn-primary" data-th-href="@{'/employee'}">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
@@ -213,57 +213,28 @@
                         <input class="col-md-8" data-th-text="${{createdAt}}" readonly type="text"/>
                     </div>
                 </div>
+                <!--/*Image details*/-->
                 <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div class="input-field">
-                        <label class="active darkmode--activated">Photos :</label>
-                        <label class="darkmode--activated">Please remove numbers where included in image
-                            number </label>
-                        <div class="input-images" style="padding-top: .5rem;"></div>
+                    <div>
+                        <label class="darkmode--activated">Photo Details : </label>
                     </div>
-                    <div class="col" data-th-if="${addStatus==false}" id="photoDetails">
-                        <div>
-                            <label class="darkmode--activated">Photo Details : </label>
-                        </div>
-                        <div class="row">
-                            <div class="col" data-th-each="file, rowStat: ${files}" id="filesList">
-                                <div class="col">
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <button aria-label="Close" class="close" data-dismiss="alert"
-                                                id="alertClose"
-                                                type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <div class="card text-center">
-                                            <div class="card-header" hidden>
-                                                <input data-th-value="${file.filename}" id="removeImages"
-                                                       name="removeImages"
-                                                       type="text"></div>
-                                            <div class="card-body">
-                                                <img alt="" class="rounded" data-th-src="${file.url}" id="img"
-                                                     src=""
-                                                     style="height: 150px; width:150px; border-radius: 10px"/>
-                                            </div>
-                                            <div class="card-footer bg-secondary text-light text-center">
-                                                <p class="darkmode--activated" data-th-text="${file.filename}"
-                                                   id="imgName"></p>
-                                                <p class="darkmode--activated"> Uploaded Date : <span
-                                                        data-th-text="${{file.createAt}}"
-                                                        id="imgCreateAt"></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <script>
-                                    $(".alert").alert();
-                                </script>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input accept="image/png, image/jpeg" id="imgUpload" name="file"
+                                   type="file">
+                            <div class="col-md-3 ">
+                                <img alt="" id="image" src="" style="height: 100px;">
                             </div>
                         </div>
                     </div>
                     <!--/* Button */-->
                     <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                        <a data-th-href="@{'/employee'}">
+                            <button class="btn btn-primary btn-outline-warning" type="button">Back</button>
+                        </a>
+                        <button class="btn btn-warning btn-outline-secondary" type="reset"> Clean</button>
                         <button class="btn btn-success" tabindex="21" type="submit">
-                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                            <span
                                 data-th-text="${addStatus==true?'Save': 'Update'}"
                                 id="submit"></span>
                         </button>
@@ -284,8 +255,5 @@
 <!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 
-<script>
-    $('.input-images').imageUploader();
-</script>
 </body>
 </html>

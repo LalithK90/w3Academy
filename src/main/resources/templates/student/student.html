@@ -10,7 +10,7 @@
 <div class="mt-5 col-12 order-4">
     <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
-            <a class="btn btn-success" href="/student/add"><i class="fa fa-user-plus"></i>
+            <a class="btn btn-success" data-th-href="@{'/student/add'}"><i class="fa fa-user-plus"></i>
                 &nbsp; New Student</a>
         </div>
         <div class="col">
@@ -21,7 +21,7 @@
             </h4>
         </div>
         <div class="col">
-            <a href="/student/workingPlace" id="searchShow" class="btn btn-primary">
+            <a data-th-href="@{'/student/workingPlace'}" id="searchShow" class="btn btn-primary">
                 <i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;
                 <i class="fas fa-store-alt" style="font-size: 20px"></i>
                 &nbsp;
@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid bg-dark formBorder text-center">
+<div class="container-fluid text-center">
     <div class="col">
         <div class="col" id="studentListPresent" data-th-if="${not #lists.isEmpty(students)}">
             <table class="table table-hover table-striped" id="myTable">

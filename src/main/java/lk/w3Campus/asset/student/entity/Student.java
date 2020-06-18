@@ -31,6 +31,7 @@ import java.util.List;
 @JsonFilter("Student")
 public class Student extends AuditEntity {
 
+
     @Size(min = 5, message = "Your name cannot be accepted")
     private String name;
 

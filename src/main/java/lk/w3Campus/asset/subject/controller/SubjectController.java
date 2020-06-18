@@ -1,6 +1,9 @@
 package lk.w3Campus.asset.subject.controller;
 
 
+import lk.w3Campus.asset.employee.service.EmployeeService;
+import lk.w3Campus.asset.semester.service.SemesterService;
+import lk.w3Campus.asset.subject.entity.Enum.EmployeeRoleSubject;
 import lk.w3Campus.asset.subject.entity.Subject;
 import lk.w3Campus.asset.subject.service.SubjectService;
 import lk.w3Campus.util.interfaces.AbstractController;
@@ -18,10 +21,14 @@ import java.util.List;
 @RequestMapping("/subject")
 public class SubjectController implements AbstractController<Subject, Long> {
     private final SubjectService subjectService;
+    private final SemesterService semesterService;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public SubjectController(SubjectService subjectService) {
+    public SubjectController(SubjectService subjectService, SemesterService semesterService, EmployeeService employeeService) {
         this.subjectService = subjectService;
+        this.semesterService = semesterService;
+        this.employeeService = employeeService;
     }
 
     private String commonThing(Model model, Subject subject) {
@@ -79,9 +86,17 @@ public class SubjectController implements AbstractController<Subject, Long> {
     }
 
     @GetMapping("/remove/{id}")
-    public String delete(@PathVariable Long id,RedirectAttributes redirectAttributes,  Model model) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes, Model model) {
         subjectService.delete(id);
         model.addAttribute("message", "Successfully deleted");
+        return "redirect:/subject";
+    }
+
+    @GetMapping("/employee/{id}")
+    public String addEmployeeToSubject(@PathVariable Long id, Model model) {
+        model.addAttribute("subject", subjectService.findById(id));
+        model.addAttribute("employees", employeeService.findAll());
+        model.addAttribute("employeeRoleSubjects", EmployeeRoleSubject.values());
         return "redirect:/subject";
     }
 

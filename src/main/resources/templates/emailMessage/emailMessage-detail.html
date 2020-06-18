@@ -10,7 +10,7 @@
 <div class="mt-5 col-12 order-4">
     <div class="pt-5 row text-center formManagement border-info">
         <div class="col">
-            <a class="btn btn-primary" href="/home">
+            <a class="btn btn-primary" data-th-href="@{'/home'}">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
             </a>
         </div>
@@ -22,7 +22,7 @@
             </h4>
         </div>
         <div class="col">
-            <a href="/emailMessage" class="btn btn-primary">
+            <a data-th-href="@{'/emailMessage'}" class="btn btn-primary">
                 <i class="fa fa-list"></i>&nbsp; View List
             </a>
         </div>
@@ -107,7 +107,7 @@
     </div>
     <br>
     <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-        <a href="/emailMessage">
+        <a data-th-href="@{'/emailMessage'}">
             <button class="btn btn-success" type="button" tabindex="10">
                 <i class="fa fa-backward " style="font-size: 20px"></i>&nbsp; &nbsp;Back
             </button>
