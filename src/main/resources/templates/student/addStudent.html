@@ -32,48 +32,28 @@
 <div class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <form class="form-horizontal" data-th-action="${addStatus==true?'/student/add':'/student/update'}"
-              data-th-object="${student}"
-              enctype="multipart/form-data" id="form" method="POST">
+              data-th-object="${student}" enctype="multipart/form-data" method="POST">
             <div class="row">
                 <!--/* Left Side */-->
                 <div class="form-group col-md-6 col-sm-6 text-left flex-column">
                     <!--/* Id */-->
-                    <div class="form-row text-right" data-th-if="${addStatus==false}" id="idStatus">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'id'}">ID :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input data-th-field="*{id}" readonly type="text"/>
-                        </div>
-                    </div>
-                    <!--/* Tittle  */-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'title'}">Title :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select data-th-field="*{title}" required tabindex="3">
-                                <option value="">Please select</option>
-                                <option data-th-each="titles : ${title}"
-                                        data-th-selected="${titles==student.title?'selected':'unselected'}"
-                                        data-th-text="${titles.title}"
-                                        data-th-value="${titles}"></option>
-                            </select>
-                        </div>
-                    </div>
+                    <input data-th-field="*{id}" data-th-if="${addStatus==false}" hidden type="text"/>
                     <!--/* Name */-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="darkmode--activated" data-th-for="${'name'}">Name :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input data-th-field="*{name}" required tabindex="4" type="text"/>
-                            <span class="error"
-                                  data-th-errors="*{name}" data-th-if="${#fields.hasErrors('name')}">Error Name</span>
-                        </div>
+                    <div class="form-group form-row">
+                        <label class="darkmode--activated col-sm-4" data-th-for="${'name'}">Name :</label>
+                        <!--/* Tittle  */-->
+                        <select class="col-sm-2" data-th-field="*{title}" required tabindex="3">
+                            <option disabled selected value="">Please select</option>
+                            <option data-th-each="titles : ${title}"
+                                    data-th-text="${titles.title}"
+                                    data-th-value="${titles}"></option>
+                        </select>
+                        <input class="col-sm-6" data-th-field="*{name}" required tabindex="4" type="text"/>
+                        <span class="error" data-th-errors="*{name}"
+                              data-th-if="${#fields.hasErrors('name')}"></span>
                     </div>
                     <!--/* Calling Name */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'callingName'}">Calling Name :</label>
                         </div>
@@ -85,7 +65,7 @@
                         </div>
                     </div>
                     <!--/* Nic */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'nic'}">NIC No :</label>
                         </div>
@@ -96,7 +76,7 @@
                         </div>
                     </div>
                     <!--/* Gender */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'gender'}">Gender :</label>
                         </div>
@@ -111,7 +91,7 @@
                         </div>
                     </div>
                     <!--/* Date of birth */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'dateOfBirth'}">Birth date :</label>
                         </div>
@@ -122,11 +102,8 @@
                                   data-th-errors="*{dateOfBirth}" data-th-if="${#fields.hasErrors('dateOfBirth')}">Error Birthday</span>
                         </div>
                     </div>
-                </div>
-                <!--/* Right Side */-->
-                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
                     <!--/* Bit registration number */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'bitRegNumber'}">BIT Registration Number
                                 :</label>
@@ -140,7 +117,7 @@
                         </div>
                     </div>
                     <!--/* Bit Index number */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'bitIndexNumber'}">BIT Index Number
                                 :</label>
@@ -148,13 +125,28 @@
                         <div class="col-md-8">
                             <input data-th-field="*{bitIndexNumber}" required tabindex="11" type="text"/>
                             <span class="error" data-th-errors="*{bitIndexNumber}"
-                                  data-th-if="${#fields.hasErrors('bitIndexNumber')}">Error
-                                                                       Calling                                                                                                                        Name</span>
-
+                                  data-th-if="${#fields.hasErrors('bitIndexNumber')}"></span>
                         </div>
                     </div>
+                    <!--/*Image details*/-->
+                    <div class="form-group form-row">
+                        <label class="darkmode--activated col-sm-4">Photo Details : </label>
+                        <div class="col-md-8">
+                            <div class="custom-file">
+                                <input accept="image/png, image/jpeg" class="custom-file-input" style="background-color: black" id="imgInput"
+                                       name="file" type="file">
+                                <label class="darkmode--activated custom-file-label" for="imgInput">Choose Image</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row">
+                        <img alt="" id="image" src="" style="height: 100px;">
+                    </div>
+                </div>
+                <!--/* Right Side */-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
                     <!--/* Address */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'address'}">Address :</label>
                         </div>
@@ -165,7 +157,7 @@
                         </div>
                     </div>
                     <!--/* Mobile Number One */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'mobileOne'}">Mobile One No :</label>
                         </div>
@@ -177,7 +169,7 @@
                         </div>
                     </div>
                     <!--/* Mobile Number Two */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'mobileTwo'}">Mobile Two No :</label>
                         </div>
@@ -189,7 +181,7 @@
                         </div>
                     </div>
                     <!--/* Land Number */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'land'}">Land No :</label>
                         </div>
@@ -201,7 +193,7 @@
                         </div>
                     </div>
                     <!--/* Email */-->
-                    <div class="form-row text-right">
+                    <div class="form-group form-row ">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'email'}">Email :</label>
                         </div>
@@ -212,7 +204,7 @@
                         </div>
                     </div>
                     <!--/* Student status */-->
-                    <div class="form-row text-right" data-th-if="${addStatus==false}">
+                    <div class="form-group form-row " data-th-if="${addStatus==false}">
                         <div class="col-md-4">
                             <label class="darkmode--activated" data-th-for="${'studentStatus'}">Student Status :</label>
                         </div>
@@ -227,48 +219,36 @@
                         </div>
                     </div>
                     <!--/* Created by and created at */-->
-                    <div data-th-if="${addStatus==false}" id="updateStatus">
-                        <div class="form-row text-right">
-                            <div class="col-md-4">
-                                <label class="darkmode--activated" data-th-for="${'createdBy'}">Created By :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input data-th-field="*{createdBy}" readonly type="text"/>
-                            </div>
+                    <div class="form-group form-row" data-th-if="${addStatus==false}">
+                        <div class="col-md-4">
+                            <label class="darkmode--activated" data-th-for="${'createdBy'}">Created By :</label>
                         </div>
-                        <div class="form-row text-right">
-                            <div class="col-md-4">
-                                <label class="darkmode--activated" data-th-for="${'createdAt'}">Created At :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input data-th-text="${{createdAt}}" readonly type="text"/>
-                            </div>
+                        <div class="col-md-8">
+                            <input data-th-field="*{createdBy}" readonly type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-row" data-th-if="${addStatus==false}">
+                        <div class="col-md-4">
+                            <label class="darkmode--activated" data-th-for="${'createdAt'}">Created At :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input data-th-text="${{createdAt}}" readonly type="text"/>
                         </div>
                     </div>
                 </div>
-                <!--/*button and photo Details*/-->
-                <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
-                    <div>
-                        <label class="darkmode--activated">Photo Details : </label>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input accept="image/png, image/jpeg" id="imgUpload" name="file"
-                                   type="file">
-                            <div class="col-md-3 ">
-                                <img alt="" id="image" src="" style="height: 100px;">
-                            </div>
-                        </div>
-                    </div>
-                    <!--/* Button */-->
-                    <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
-                        <button class="btn btn-success" tabindex="21" type="submit">
-                            <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;
-                            <span data-th-text="${addStatus==true?'Save': 'Update'}"></span>
-                        </button>
-                    </div>
+                <!--/* Button */-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                    <a data-th-href="${'/student'}">
+                        <button class="btn btn-secondary btn-outline-secondary" type="button">Back</button>
+                    </a>
+                    <button class="btn btn-warning mr-5 darkmode--activated" tabindex="9" type="reset">
+                        Clear
+                    </button>
+                    <button class="btn btn-success" tabindex="21" type="submit">
+                        <span data-th-text="${addStatus==true?'Save': 'Update'}"></span>
+                    </button>
                 </div>
-                <!--/*Error all display*/-->
+                <!--/* Error all display */-->
                 <div class="form-row">
                     <label class="darkmode--activated" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '"
                            id="errorLabel">Errors: </label>
@@ -285,6 +265,22 @@
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
 <!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $("#imgInput").change(function () {
+        readURL(this);
+    });
+</script>
 </body>
 </html>

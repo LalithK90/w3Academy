@@ -87,6 +87,9 @@ public class Employee extends AuditEntity {
     @OneToOne(mappedBy = "employee")
     private User user;
 
+    @ManyToOne
+    private Branch branch;
+
     @ManyToMany(mappedBy = "employees")
     private List<EmailMessage> emailMessages;
 
@@ -96,14 +99,10 @@ public class Employee extends AuditEntity {
     @OneToMany(mappedBy = "employee")
     private List<EmployeeBranchCourse> employeeBranchCourses;
 
-    @ManyToOne
-    private Branch branch;
-
     @Transient
     private MultipartFile file;
 
     @Transient
     private List<FileInfo> fileInfos = new ArrayList<>();
-
 
 }
