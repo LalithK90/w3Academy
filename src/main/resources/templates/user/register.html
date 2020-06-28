@@ -9,31 +9,30 @@
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <br>
 <div class="container-fluid mt-5">
-    <div class="container mt-5 pt-5">
+    <div class="container-fluid mt-5 pt-5 offset-sm-3 col-sm-5">
         <div class="container-fluid">
+            <h3 class="font-weight-bold p-5 darkmode--activated">SIGN IN</h3>
             <form class="form" data-th-action="@{/register}" method="post">
-                <span class="h3 font-weight-bold p-5">SIGN IN</span>
-                <input data-th-value="${newOrOld}" hidden name="newOrOld" required type="text">
-                <div class="form-group" data-validate="Email is required">
+                <input data-th-value="${newOrOld}"  name="newOrOld" required type="text" hidden>
+                <div class="form-group form-row" data-validate="Email is required">
                     <input aria-describedby="helpId"
-                           data-th-placeholder="${newOrOld=='new'?'Type your Email Here':'Please enter your registered user name '}" name="email" required type="email">
+                           data-th-placeholder="${newOrOld=='new'?'Type your Email Here':'Please enter your registered user name '}"
+                           name="email" required type="email">
                     <small class="form-text text-muted font-italic" id="helpId">Please Enter valid email.</small>
                 </div>
-                <div class="row container">
+                <div class="form-group form-row">
                     <span data-th-text="${message}"></span>
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                        <label class="form-check-label" for="invalidCheck3">
-                            Agree to terms and conditions
-                        </label>
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
+                <div class="form-group form-row" data-th-if="${newOrOld=='new'}">
+                    <a data-target="#termsAndCondition" data-toggle="modal" type="button"><label
+                            class="darkmode--activated">Agree
+                        to terms and
+                        conditions</label></a>
+                    <input class="col-sm-5" id="acceptTermsAndCondition" required
+                           type="checkbox">
+
                 </div>
-                <div class="form-row">
+                <div class="form-group form-row">
                     <div class="container-fluid">
                         <button class="btn btn-success" type="submit">
                             Submit
@@ -48,6 +47,67 @@
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
 <!--/* script include */-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div aria-hidden="true" aria-labelledby="modalScrollableBodyTitle" class="modal fade bg-transparent"
+     id="termsAndCondition"
+     role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalScrollableBodyTitle">W3 Campus Terms and Conditions</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section>
+                    <h2>Attendance</h2>
+                    <p>When you attend to the classes, punch the student registration card to the QR Code Reader which
+                        is placed in the front office and keep the relevant rack.</p>
+                    <p>It is compulsory to maintain 80% of attendance rate for theory and practical classes.</p>
+                    <p>If any student has absented for a particular class, he/she should bring a formal letter from the
+                        parent mentioning the reason for the absenteeism and hand over the letter to the class
+                        teacher.</p>
+                    <p>Students should sign the in time and the out time in the attendance sheet.</p>
+                    <p> It is possible to leave early from a class submitting an authorized letter from the parent or
+                        guardian.</p>
+                    <p> Student should reach the class 5 minutes before the class stars.</p>
+                    <h2>Payment</h2>
+                    <p>Payment schemes are indicated in the student agreement and the student should pay the
+                        installments on or before the due date Payment can be paid by cash, cheques and credit/debit
+                        cards.</p>
+                    <p>If any payment has delayed more than 7 days and it is inactivated by the system student have to
+                        pay an additional amount up to Rs. 2500/= for the delayed period. (If there is any financial
+                        difficulty to pay the amount, student should have to inform the reason to our front office two
+                        days before the due date)</p>
+                    <p> If there is any additional payment it will be informed to the parent/guardian via a printed
+                        letter or email from the official email with signature of responsible person of the branch
+                        (Manager or Assistance Manager)</p>
+                    <h2>Courses Postpones, Branch Transfer and Batch Transfer</h2>
+                    <p>All the course Postpones, Branch Transfer and Batch Transfer should be informed to the Management
+                        by a formal request letter.</p>
+                    <p>We are not accountable for all the non-reported Postpones, Branch Transfers and Batch Transfers.
+                        The students will be automatically suspended by the system, in such case and they have to
+                        re-register for the course</p>.
+                </section>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-warning btn-secondary mr-5" data-dismiss="modal" id="notAcceptBtn"
+                        type="button">Close
+                </button>
+                <button class="btn btn-primary ml-5" data-dismiss="modal" id="acceptBtn" type="button">Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#acceptBtn").bind("click", function () {
+        $( "#acceptTermsAndCondition" ).prop( {"disabled" : false,"checked": true} );
+    });
+    $("#notAcceptBtn").bind("click", function () {
+        $( "#acceptTermsAndCondition" ).prop( {"disabled" : false,"checked": false} );
+    });
+</script>
 </body>
 </html>
 

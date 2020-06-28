@@ -51,12 +51,13 @@ $(document).ready(function () {
     const darkmode = new Darkmode(options);
     darkmode.showWidget();
 //dark mode script - end
+
 });
 
 
 // regex
 let nicRegex = /^([0-9]{9}[vV|xX])|^([0-9]{12})$/;
-let mobileRegex = /^([0][7][\d]{8}$)|^([7][\d]{8})$/;
+let mobileRegex = /^([0][7][0-8][\d]{7}$)|^([7][0-8][\d]{7})$/;
 let landRegex = /^0((11)|(2(1|[3-7]))|(3[1-8])|(4(1|5|7))|(5(1|2|4|5|7))|(6(3|[5-7]))|([8-9]1))([2-4]|5|7|9)[0-9]{6}$/;
 let nameRegex = /^[a-zA-Z .-]{5}[ a-zA-Z.-]+$/;
 let numberRegex = /^([eE][hH][sS][\d]+)$/;
@@ -557,22 +558,6 @@ let deleteAllTableRow = function (tableName) {
     }
 };
 
-/*jquery - ui function*/
-//$( "input" ).checkboxradio;
-
-$(function () {
-    $("#").resizable({
-        autoHide: true,
-        aspectRatio: true,
-        ghost: true,
-    });
-});
-
-//$( ".login" ).draggable();
-//$( "#dateOfBirth" ).datepicker;
-//$( document ).tooltip();
-
-
 //password validator user add
 $('#password').keyup(function () {
     $(this).attr('min', 6);
@@ -649,3 +634,4 @@ $(".reveal").on('click', function () {
         $pwd.attr('type', 'password');
     }
 });
+

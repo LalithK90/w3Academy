@@ -18,7 +18,7 @@
         <div class="col-sm-4 form-group">
             <form data-th-action="${addStatus==true?'/subject/add':'/subject/update'}" data-th-object="${subject}"
                   method="POST">
-                <div class="row">                    <!--/* /* Id */ */-->
+                <div class="row">                    <!--/* Id */-->
                     <input class="col-sm-8" data-th-field="*{id}" data-th-if="${addStatus==false}" hidden id="id"
                            type="text"/>
                     <!--/* Name */-->
@@ -86,7 +86,7 @@
                     <th class="text-center">
                         <a data-th-href="${'/subject/employee/' + one.id}">
                             <button class="btn btn-primary text-center btn-sm mr-2 pr-3">
-                                <i aria-hidden="true" class="fa fa-edit mr-1"></i>Add Employee
+                                <i aria-hidden="true" class="fa fa-edit mr-1"></i>Employee
                             </button>
                         </a>
                         <a data-th-href="${'/subject/edit/' + one.id}">

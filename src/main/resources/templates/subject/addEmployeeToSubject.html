@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--/* Styles, meta data, and title are included */-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--/* Nav bar is included */-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<div class="container-fluid mt-5 order-4">
+    <div class="p-5 container-fluid text-center">
+        <h1 class="h1 font-weight-bolder text-black-50">Subject Allocate To Employee </h1>
+    </div>
+    <div class="row">
+        <!--/* /*subject add Employee form*/ */-->
+        <div class="col-sm-6 offset-md-2 form-group">
+            <form data-th-action="${addStatus==true?'/subject/add':'/subject/update'}" data-th-object="${subject}"
+                  method="POST">
+                <div class="row">                    <!--/* Id */-->
+                    <input class="col-sm-8" data-th-field="*{id}" data-th-if="${addStatus==false}" hidden id="id"
+                           type="text"/>
+                    <!--/*Employee*/-->
+                    <div class="form-group form-row col-12">
+                        <label class="darkmode--activated col-sm-4" for="employee">Select Employee
+                            :</label>
+                        <select class="col-md-8" id="employee">
+                            <option selected value="">Please select</option>
+                            <option data-th-each="employee : ${employees}"
+                                    data-th-text="${employee.name}"
+                                    data-th-value="${employee.id}"></option>
+                        </select>
+                    </div>
+                    <!--/* employee subject role */-->
+                    <div class="form-group form-row col-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-inverse" id="employees">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Name</th>
+                                    <th>Employee Role</th>
+                                    <th>Modify</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-th-each="subjectEmployee, index : ${subject.subjectEmployees}">
+                                    <td>[[${index.count}]]</td>
+                                    <td>[[${subjectEmployee.employee.callingName}]]</td>
+                                    <td>
+                                        <!--Radio button-->
+                                        <div class="col">
+                                            <div class="custom-control custom-checkbox custom-control-inline "
+                                                 data-th-each="employeeRoleSubject,abc : ${employeeRoleSubjects}">
+                                                <input class="custom-control-input itemSupplierStatus"
+                                                       data-th-checked="${employeeRoleSubject==subjectEmployee.employeeRoleSubject}"
+                                                       data-th-id="${index.index}+${employeeRoleSubject}"
+                                                       data-th-name="${'subjectEmployee[__${index.index}__].employeeRoleSubject'}"
+                                                       data-th-value="${employeeRoleSubject}" required
+                                                       type="radio"/>
+                                                <label class="custom-control-label"
+                                                       data-th-for="${index.index}+${employeeRoleSubject}"
+                                                       data-th-text="${employeeRoleSubject.employeeRoleSubject}"> radio
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-outline-danger" onclick="tableRowRemove(this)"
+                                                type="button">
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/* Button */-->
+                    <div class="form-group form-row col-12">
+                        <div class="container-fluid text-right">
+                            <a data-th-href="${'/subject'}">
+                                <button class="btn btn-secondary btn-outline-secondary" type="button">Back</button>
+                            </a>
+                            <button class="btn btn-warning mr-5 darkmode--activated" tabindex="9" type="reset">
+                                Clear
+                            </button>
+                            <button class="btn btn-success darkmode--activated" tabindex="8" type="submit">
+                                <span data-th-text="${addStatus==true?'Save': 'Update'}"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--/* footer is */-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--/* script is included */-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<script type="text/javascript" data-th-inline="javascript">
+
+    //add new item and price
+    $("#employee").bind('change', function () {
+        let valueA = optionElementRemove("#employee");
+        tableRowAdd(valueA);
+    });
+
+    //table row remove
+    let tableRowRemove = function (obj) {
+
+        let itemIndex = obj.parentNode.parentNode.rowIndex;
+        let itemSelected = document.getElementById("employees").rows.item(itemIndex).cells;
+
+        let removeItemValue = itemSelected[1].childNodes[1].nextSibling.nextSibling.attributes.value.nodeValue;
+        let removeItemText = itemSelected[1].childNodes[1].firstChild.nodeValue;
+
+        $("#employee").append(new Option(removeItemText, removeItemValue));
+        let removeRow = `#selectedItemInTable tr:eq(${itemIndex})`
+        $(removeRow).remove();
+
+
+    }
+    //option tag remove
+    let optionElementRemove = function (id) {
+        let selectedValue = $(id).val();
+        let selectedItemId = `${id} option[value='${selectedValue}']`;
+        let selectedValueInnerHTML = $(selectedItemId).html();
+        $(selectedItemId).remove();
+        return {name: selectedValueInnerHTML, value: selectedValue};
+    }
+    //table row add
+    let tableRowAdd = function (value) {
+        let rows = $("#employees tr").length;
+        /*<![CDATA[*/
+        let employeeRoleSubjects = [];
+
+        /*[# th:each="employeeRoleSubject : ${employeeRoleSubjects}"]*/
+        employeeRoleSubjects.push(employeeRoleSubjectObject = {
+            name: "[(${employeeRoleSubject})]",
+            value: "[(${employeeRoleSubject.employeeRoleSubject})]"
+        });
+        /*[/]*/
+        /*]]>*/
+        employeeRoleSubjects.forEach(val => {
+            console.log(val)
+        })
+        let rowCount = rows - 1;
+        let html = `<tr>
+                        <td>${rows}</td>
+                        <td>
+                            <span>${value.name}</span>
+                            <input type="hidden" name="supplierItems[${rowCount}].item.id" value="${value.value}">
+                        </td>
+                        <td>
+                         <div class="form-row form-inline">
+                                <label>
+                            Rs. <input type="number" min="0" step="0.5" class="form-control" name="supplierItems[${rowCount}].price" required>
+                                </label>
+                         </div>
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
+                        </td>
+                    </tr>`
+
+        $("#employees tr:last").after(html);
+    }
+
+</script>
+
+</body>
+</html>
